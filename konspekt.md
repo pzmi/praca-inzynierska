@@ -10,17 +10,19 @@ Cały wstęp stanowi opis tematu pracy, streszczenie treści.
 
 # Opis technologii
 
+Języki programowania to nie tylko składania, ale cały ekosystem technologii tworzony wokół nich.
+
 ## Java
 
-Java jako standard aplikacji enterprise. Przedstawienie powszechności Javy w biznesie, współczesny Cobol.
+Java jako standard aplikacji biznesowych. Przedstawienie powszechności Javy w biznesie, współczesny Cobol.
 
 ## JavaScript
 
-Wykorzystanie JavaScript po stronie serwerowej dzięki Node.js. Założenia i podstawy Node.js.
+Opis popularności JavaScript, języka stworzonego na cele interfejsu użytkownika, po stronie serwerowej. Wykorzystanie JS dla backendu dzięki Node.js. Założenia i podstawy Node.js.
 
 ## Elixir
 
-Opis Elixir - młody język, nowatorskie podejście oparte na silnych podstawach Erlanga.
+Opis Elixira - młody, zyskujący na popularności popularności język, nowatorskie podejście oparte na silnych podstawach Erlanga.
 
 # Architektura systemu informatycznego
 
@@ -30,7 +32,7 @@ Typowe wzorce architektoniczne dla poszczególnych technologii.
 
 Architektura silnie związana ze standardami JavaEE.
 
-### Architektura wielowastrwowa
+### Architektura wielowarstwowa
 
 Standardowy wzorzec dla aplikacji JEE. Opis podziału na część webową, logikę biznesową i bazę danych. 
 
@@ -44,7 +46,7 @@ libuv jako podstawa działania Node.js. Wady i zalety asynchroniczności dla mod
 
 ## Elixir
 
-Dziedzictwo 30 lat Erlanga i wypracowanch wzorców. Standardy i wzorce OTP.
+Dziedzictwo 30 lat Erlanga i wypracowanych wzorców. Standardy i wzorce OTP.
 
 ### Model aktorowy
 
@@ -52,11 +54,11 @@ Opis modelu aktorowego zakorzenionego w wirtualnej maszynie Erlanga. Popularnoś
 
 ## Współczesne wzorce architektoniczne
 
-Rozproszone aplikacje, REST, przede wszystkim mikroserwisy.
+Aplikacje "w chmurze", rozproszone aplikacje, architektura mikroserwisowa, REST.
 
 # Wydajność
 
-Implementacja kilku aplikacji w każdej z przedstaiownych technologii. Test obciążeniowy każdej z implementacji w celu porównania osiągów.
+Implementacja kilku aplikacji w każdej z przedstawionych technologii. Test obciążeniowy każdej z implementacji w celu porównania osiągów.
 
 ## Proste zapytanie
 
@@ -72,7 +74,7 @@ Wsparcie dla operacji we/wy, np. zapis i odczyt z bazy danych.
 
 ## Wnioski
 
-Porówanianie otrzymanych wyników.
+Porównanie otrzymanych wyników.
 
 # Skalowalność
 
@@ -92,7 +94,7 @@ Distributed Erland i Distributed Elixir. Protokoły komunikacji między węzłam
 
 # Produktywność
 
-Ilość linii kodu i linii konfiguracji. Środowisko programisty, dostępność narzędzi i bibliotek. Analiza społeczności jako istotnego czynnika rozwoju technologii na podstawie statystyk z GitHub, Maven Central, npmjs, hex.pm.
+Ilość linii kodu i linii konfiguracji. Środowisko programisty, dostępność narzędzi i bibliotek.
 
 ## Java
 
@@ -101,6 +103,8 @@ Ilość linii kodu i linii konfiguracji. Środowisko programisty, dostępność 
 ## Elixir
 
 ## Statystyki
+
+Analiza społeczności jako istotnego czynnika rozwoju technologii na podstawie statystyk z GitHub, Maven Central, npmjs, hex.pm.
 
 ## Wnioski
 

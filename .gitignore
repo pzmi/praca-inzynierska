@@ -1,2 +1,14 @@
 *.pdf
 *.swp
+*.aux
+*.bbl
+*.blg
+*.log
+*.toc
+1-introduction.tex
+3-architecture.tex 
+5-scalability.tex
+7-summary.tex
+2-technology.tex
+4-performance.tex
+6-productivity.tex

@@ -8,7 +8,7 @@ for file in $files; do
 	pandoc $file -o ${base}.tex
 done
 
-pdflatex praca.tex
-bibtex praca
-pdflatex praca.tex
-pdflatex praca.tex
+pdflatex praca
+biber praca
+pdflatex praca
+pdflatex praca

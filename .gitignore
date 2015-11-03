@@ -5,6 +5,8 @@
 *.blg
 *.log
 *.toc
+*.bcf
+*.run.xml
 1-introduction.tex
 3-architecture.tex 
 5-scalability.tex

@@ -10,9 +10,18 @@ Java jako standard aplikacji biznesowych. Przedstawienie powszechności Javy w b
 
 Opis popularności JavaScript, języka stworzonego na cele interfejsu użytkownika, po stronie serwerowej. Wykorzystanie JS dla backendu dzięki Node.js. Założenia i podstawy Node.js.
 
-## Elixir
+## Elixir i Erlang
 
-Elixir jest nowym językiem programowania opartym o dorobek języka Erlang, stworzonego przez firmę Ericsson. Jest dynamicznie typowany, utrzymany w funkcyjnym paradygmacie funkcyjnym, zaprojektowanym do tworzenie skalowalnych, łatwych w utrzymaniu aplikacji. \cite{thomas2014elixir}
-Wykorzystanie Erlanga jako podstawy nie sprowadza się jedynie do założeń. Erlang to nie tylko funkcyjny język programowania, ale również zestaw wzorców projektowych, zwanych OTP (dawniej Open Telecom Platform \cite{logan2010erlang}), oraz wirtualnej maszyny Erlanga, BEAM. Ta ostatnia została stworzona od podstaw w celu wspierania złożonych, współbieżnych i rozproszonych systemów o wysokiej odporności na błędy. Kod Elixira, jest wykonywany w ramach lekkich procesów (aktorów), trzymających własny stan i komunikujących się między sobą poprzez przesyłanie wiadomości (ang. *message passing*). Wirtualna maszyna sama rozdziela procesy pomiędzy rdzenie procesora zapewniając równoległość przetwarzania oraz dbając o żywotność procesów. 
-Elixir odziedziczył również całe zaplecze narzędzi stworzonych na potrzeby Erlanga oraz kod biblioteczny, który może być wykorzystywany bez strat wydajności. 
-Nie jest to jedynie próba odświeżenia 30-o letniego języka jakim jest Erlang, a wzbogacenie go przydatne funkcjonalności, jak metaprogramowanie czy polimorfizm, oraz przyjazną składnię. Celem twórcy Elixira, José Valima, było stworzenie rozszerzalnego, przyjaznego programistom języka. \cite{valim2013design}
+Elixir jest młodym językiem programowania stworzonym na podstawie języka Erlang. Jego korzenie są na tyle wyraźne i znaczące, że nie sposób go przedstawić bez wcześniejszego przyjrzenia się Erlangowi.
+
+### Erlang
+
+Erlang jest funkcyjnym językiem programowania stworzonym w latach 80. przez szwedzką firmę telekomunikacyjną Ericsson. Jego przeznaczeniem było budowanie skalowalnych i niezawodnych systemów.  
+Pomimo swoich początków w systemach telekomunikacyjnych nie jest wyspecjalizowany w tej domenie, a sprawdza się wszędzie tam gdzie potrzeba współbieżności, rozproszonej komunikacji i odporności na błędy. W dobie internetu są to cechy bardzo pożądane. Aby spełnić postawione założenia stworzono wirtualną maszynę zwaną BEAM (Bogdan/Björn’s Erlang Abstract Machine).\autocite{hebert2013erlang}. Programy pisane w Erlangu są wysoce współbieżne ze względu na fakt, że poszczególne funkcjonalności są wykonywane w ramach lekkich procesów (aktorów). Ich cyklem życia zarządza wirtualna maszyna, przydzielając dostępne zasoby sprzętowe. Aby zapewnić niezawodność procesy są od siebie odseparowane i niezależne, awaria jednego z nich nie prowadzi do eskalacji problemu. Ze względu na taką separacje, komunikacja pomiędzy procesami odbywa się poprzez przesyłane między sobą wiadomości (ang. *message passing*). Zbiór takich jednostek może tworzyć złożone, skalowalne systemy.  
+Erlang to nie tylko język programowania, ale również zestaw narzędzi i wzorców programistycznych zwanych *Open Telecom Platform* (OTP). Mimo swojej nazwy, jest to zbiór bibliotek ogólnego zastosowania, wprowadzający standardowe rozwiązania dla powszechnych problemów. Dodatkowo zawiera narzędzia do rozproszonej komunikacji, wykrywania błędów czy przeładowywania kodu działającego systemu.\autocite{logan2010erlang}
+
+### Elixir
+
+Elixir jest młodym językiem programowania działającym na maszynie wirtualnej Erlanga. W przeciwieństwie do Erlanga, nie jest to produkt firmy a otwarty projekt, rozwijany przez społeczność entuzjastów.  
+Celem jego twórcy, José Valima, było stworzenie języka rozszerzalnego, przyjaznego programistom.\autocite{valim2013design} Pomimo tego, że Elixir jest bardzo zbliżony do Erlanga, jest przystępniejszy dla użytkownika. Pozbyto się zbędnych elementów i duplikacji w celu ułatwienia tworzenia i utrzymania kodu, porządkuje standardową bibliotekę oraz definiuje powszechne konwencje. Ponadto Elixir wprowadza mechanizmy pozwalające rozszerzać język przy użyciu metaprogramowania i polimorfizmu.  
+Dzięki wykorzystaniu BEAM, Elixir może korzystać z narzędzi stworzonych na potrzeby Erlanga oraz biblioteki kodu bez uszczerbku na wydajności.\autocite{thomas2014elixir} \autocite{stlaurent2014elixir}

@@ -24,4 +24,4 @@ Erlang to nie tylko język programowania, ale również zestaw narzędzi i wzorc
 
 Elixir jest młodym językiem programowania działającym na maszynie wirtualnej Erlanga. W przeciwieństwie do Erlanga, nie jest to produkt firmy a otwarty projekt, rozwijany przez społeczność entuzjastów.  
 Celem jego twórcy, José Valima, było stworzenie języka rozszerzalnego, przyjaznego programistom.\autocite{valim2013design} Pomimo tego, że Elixir jest bardzo zbliżony do Erlanga, jest przystępniejszy dla użytkownika. Pozbyto się zbędnych elementów i duplikacji w celu ułatwienia tworzenia i utrzymania kodu, porządkuje standardową bibliotekę oraz definiuje powszechne konwencje. Ponadto Elixir wprowadza mechanizmy pozwalające rozszerzać język przy użyciu metaprogramowania i polimorfizmu.  
-Dzięki wykorzystaniu BEAM, Elixir może korzystać z narzędzi stworzonych na potrzeby Erlanga oraz biblioteki kodu bez uszczerbku na wydajności.\autocite{thomas2014elixir} \autocite{stlaurent2014elixir}
+Dzięki wykorzystaniu BEAM, Elixir może korzystać z narzędzi stworzonych na potrzeby Erlanga oraz biblioteki kodu bez uszczerbku na wydajności.\autocite{thomas2014elixir, stlaurent2014elixir}

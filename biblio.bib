@@ -89,16 +89,21 @@
  publisher = {HELION}
 }
 
+@proceedings{ifip77,
+  title = {Information Processing 77, Proceedings of IFIP Congress 77},
+  booktitle = {Information Processing 77, Proceedings of IFIP Congress 77},
+  month = {August},
+  year = {1977},
+  publisher = {North Holland, Amsterdam}
+}
+
 @inproceedings{hewitt1977laws,
   author    = {Hewitt, Carl and
                Baker, Henry G.},
   title     = {Laws for Communicating Parallel Processes},
-  booktitle = {{IFIP} Congress},
+  crossref  = {ifip77},
   pages     = {987--992},
-  year      = {1977},
-  timestamp = {Thu, 03 Jan 2002 12:03:21 +0100},
-  biburl    = {http://dblp.uni-trier.de/rec/bib/conf/ifip/HewittB77},
-  bibsource = {dblp computer science bibliography, http://dblp.org}
+  year      = {1977}
 }
 
 @book{agha86actors,
@@ -119,49 +124,72 @@
  urldate = {2015-11-08}
 }
 
-@inproceedings{karmani2009actor,
- author = {Karmani, Rajesh K. and Shali, Amin and Agha, Gul},
- title = {Actor Frameworks for the JVM Platform: A Comparative Analysis},
+@proceedings{pppj2009,
+ title = {Proceedings of the 7th International Conference on Principles and Practice of Programming in Java},
  booktitle = {Proceedings of the 7th International Conference on Principles and Practice of Programming in Java},
- series = {PPPJ '09},
- year = {2009},
- isbn = {978-1-60558-598-7},
- location = {Calgary, Alberta, Canada},
- pages = {11--20},
- numpages = {10},
- url = {http://doi.acm.org/10.1145/1596655.1596658},
  doi = {10.1145/1596655.1596658},
  acmid = {1596658},
  publisher = {ACM},
  address = {New York, NY, USA},
+series = {PPPJ '09},
+ year = {2009},
+ isbn = {978-1-60558-598-7},
+ location = {Calgary, Alberta, Canada},
+}
+
+@inproceedings{karmani2009actor,
+ author = {Karmani, Rajesh K. and Shali, Amin and Agha, Gul},
+ title = {Actor Frameworks for the JVM Platform: A Comparative Analysis},
  keywords = {JVM, Java, abstractions, actors, comparison, frameworks, libraries, performance, semantics},
+ crossref = {pppj2009}
 } 
 
+@proceedings{icfp1997,
+ title = {ICFP '97 Proceedings of the second ACM SIGPLAN international conference on Functional programming },
+ booktitle = {ICFP '97 Proceedings of the second ACM SIGPLAN international conference on Functional programming},
+ doi = {10.1145/258948.258967},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ year = {1997},
+ isbn = {0-89791-918-1},
+}
+
 @inproceedings{armstrong96erlang,
-    author = {Joe Armstrong},
-    title = {Erlang - A survey of the language and its industrial applications},
-    booktitle = {In Proceedings of the symposium on industrial applications of Prolog (INAP96). 16 { 18},
-    year = {1996}
+  author = {Joe Armstrong},
+  title = {Erlang - A survey of the language and its industrial applications},
+  year = {1996},
+  crossref = {icfp1997}
 }
 
 @article{stutter2005software,
- author = {Sutter, Herb and Larus, James},
- title = {Software and the Concurrency Revolution},
- journal = {Queue},
- issue_date = {September 2005},
- volume = {3},
- number = {7},
- month = sep,
- year = {2005},
- issn = {1542-7730},
- pages = {54--62},
- numpages = {9},
- url = {http://doi.acm.org/10.1145/1095408.1095421},
- doi = {10.1145/1095408.1095421},
- acmid = {1095421},
- publisher = {ACM},
- address = {New York, NY, USA},
+  author = {Sutter, Herb and Larus, James},
+  title = {Software and the Concurrency Revolution},
+  journal = {Queue},
+  volume = {3},
+  number = {7},
+  year = {2005},
+  issn = {1542-7730},
+  pages = {54--62},
+  numpages = {9},
+  doi = {10.1145/1095408.1095421},
+  acmid = {1095421},
+  publisher = {ACM},
+  address = {New York, NY, USA},
 } 
+
+@proceedings{conf/ecoop/2013,
+    editor = "Castagna, Giuseppe",
+    title = "ECOOP 2013 - Object-Oriented Programming - 27th European
+             Conference, Montpellier, France, July 1-5, 2013. Proceedings",
+    ee = "http://dx.doi.org/10.1007/978-3-642-39038-8",
+    booktitle = {ECOOP 2013 - Object-Oriented Programming - 27th European
+             Conference, Montpellier, France, July 1-5, 2013. Proceedings},
+    isbn = "978-3-642-39037-1",
+    publisher = "Springer",
+    series = "Lecture Notes in Computer Science",
+    volume = "7920",
+    year = "2013",
+}
 
 @inproceedings{tasharofi2013why,
     author = "Tasharofi, Samira and Dinges, Peter and Johnson, Ralph
@@ -180,18 +208,34 @@
  author = {Lee, Edward A.},
  title = {The Problem with Threads},
  journal = {Computer},
- issue_date = {May 2006},
  volume = {39},
  number = {5},
- month = may,
  year = {2006},
  issn = {0018-9162},
  pages = {33--42},
  numpages = {10},
- url = {http://dx.doi.org/10.1109/MC.2006.180},
  doi = {10.1109/MC.2006.180},
  acmid = {1137289},
  publisher = {IEEE Computer Society Press},
  address = {Los Alamitos, CA, USA},
  keywords = {Coordination languages, Design patterns, Nondeterminism, Programming paradigms, Programming paradigms, Threads, Nondeterminism, Design patterns, Coordination languages, Threads},
+}
+
+@article{lamport1978time,
+  title={Time, clocks, and the ordering of events in a distributed system},
+  author={Lamport, Leslie},
+  journal={Communications of the ACM},
+  volume={21},
+  number={7},
+  pages={558--565},
+  year={1978},
+  publisher={ACM}
+}
+
+@thesis{dacker2000concurrent,
+  title = {Concurrent Functional Programming for Telecommunications: A Case Study of Technology Introduction},
+  author = {Däcker, Bjarne},
+  publisher = {Royal Institute of Technology},
+  year = {2000},
+  location = {Stockholm}
 }

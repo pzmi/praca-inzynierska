@@ -8,4 +8,17 @@
 \usepackage{indentfirst}
 \usepackage[style=numeric,sorting=none,firstinits=true]{biblatex}
 \usepackage{csquotes}
+\DeclareQuoteStyle[quotes]{polish}
+  {\quotedblbase}
+  {\textquotedblright}
+  [0.05em]
+  {\quotesinglbase}
+  {\fixligatures\textquoteright}
+\DeclareQuoteAlias[quotes]{polish}{polish}
+\DeclareQuoteOption{polish}
+
+\usepackage{graphicx}
 \selectlanguage{polish}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[a4paper,inner=3.5cm,outer=2.5cm]{geometry}

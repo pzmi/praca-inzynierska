@@ -7,7 +7,7 @@ Z drugiej strony tworzenie systemów rozproszonych niesie ze sobą te same ogran
 
 ## Java
 
-Architektura silnie związana ze standardami JavaEE.
+Architektura złożonych systemów pisanych w Javie jest silnie związana z Javą Enterprise Edition, gdyż definiuje ona szereg standardów dla tworzenia logiki aplikacyjnej. Proces standaryzacyjny JavyEE jest przeprowadzany przez społeczność w ramach Java Community Process. Biorą w nim udział przede wszystkim przedsiębiorstwa, np. Credit Suisse, Ericsson, Fujitsu, IBM czy Intel\autocite{jcp2015}. Poprzez wkład takich firm JavaEE jest powszechnie wykorzystywana w branży finansowej lub IT.
 
 ### Architektura wielowarstwowa
 
@@ -30,7 +30,7 @@ Podejście do współbieżności w Erlangu/OTP znacznie różni się od powszech
 W celu zapewnienia wysokiej niezawodności i odporności na błędy wprowadzone zostało jedno z ważniejszych *zachowań* OTP, "Supervisor" (ang. nadzorca). Jest on odpowiedzialny za tworzenie i monitorowanie stanu procesów wykonawczych. W sytuacji gdy proces wykonawczy, w wyniku błędu, przerwie pracę, wtedy nadzorca jest w stanie przywrócić poprawne funkcjonowanie systemu przywracając wykonawcę do normalnego stanu. Nadzorcy, będąc jedynie typem zachowania, mogą być traktowani jako zwykłe procesy wykonawcze, a zatem ich stan może być monitorowany przez innego nadzorcę tworząc w drzewa nadzorcze.
 ![Schemat drzewa nadzorczego](graphics/supervision-tree.png)
 W ten sposób system nie posiada jednego punktu odpowiedzialnego za stabilność, a jest on podzielony na sekcje.  
-Równie ważnym elementem OTP jest protokół komunikacji rozproszonej Erlanga. Podobnie jak lekkie procesy wirtualnej maszyny, komunikacja rozproszona bazuje na modelu aktorowym. Poza izolacją procesów na różnych węzłach komunikacji, istotną cechą protokołu jest jego transparentność. Wymiana wiadomości odbywa się w taki sam sposób jak pomiędzy procesami na jednej maszynie. Każdy z rozproszonych węzłów jest świadomy istnienia innych węzłów i może się z nimi komunikować tak jakby tworzyły jeden spójny system.
+Równie ważnym elementem OTP jest protokół komunikacji rozproszonej Erlanga. Podobnie jak lekkie procesy wirtualnej maszyny, komunikacja rozproszona bazuje na modelu aktorowym. Poza izolacją procesów na różnych węzłach komunikacji, istotną cechą protokołu jest jego transparentność. Wymiana wiadomości odbywa się w taki sam sposób jak pomiędzy procesami na jednej maszynie. Każdy z rozproszonych węzłów jest świadomy istnienia innych węzłów i może się z nimi komunikować tak jakby tworzyły jeden spójny system.\autocite{logan2010erlang}
 
 ### Model aktorowy
  

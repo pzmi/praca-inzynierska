@@ -4,7 +4,7 @@ Języki programowania to nie tylko składania, ale cały ekosystem technologii t
 
 ## Java
 
-Java jako standard aplikacji biznesowych. Przedstawienie powszechności Javy w biznesie, współczesny Cobol.
+Java jest platformą programistyczną, której kluczowymi elementami są obiektowy język programowania Java oraz Java Virtual Machine (ang. wirtualna maszyna Javy). Została stworzona przez firmę Sun Microsystems w 1995, obecnie jest własnością Oracle Corporation, do do budowania przenośnego oprogramowania. Java jest jest jednym z najpopularniejszych języków programowania na świecie\autocite{tiobe2015index}. Java dzieli się na kilka wydań różniących się funkcjonalnością i przeznaczeniem. Najbardziej powszechne z nich to Java Standard Edition przeznaczona do ogólnego zastosowania. Stanowi rdzeń języka wzbogacony o często wykorzystywane biblioteki jak dostęp do bazy danych czy łączność sieciową oraz narzędzia, w skład których wchodzą wirtualna maszyna i aplikacje deweloperskie. Kolejnym wydaniem jest Java Micro Edition cechująca się małymi wymaganiami sprzętowymi, przeznaczona do programowania systemów wbudowanych. Ostatnim z wydań jest Java Enterprise Edition. Bazuje ono na Javie SE, rozszerzając ją o interfejsy przeznaczone dla rozbudowanych, skalowalnych systemów sieciowych.
 
 ## JavaScript
 

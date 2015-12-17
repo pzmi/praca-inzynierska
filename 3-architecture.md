@@ -5,7 +5,13 @@ Złożoność systemów informatycznych stale rośnie. Wraz ze złożonością z
 Problem rosnącego zapotrzebowania na moc obliczeniową można rozwiązać również poprzez zastosowanie systemów rozproszonych. Za tym podejściem przemawia wiele czynników: geograficzne rozdystrybuowanie źródeł i ujść informacji, wymagania niższego czasu rekcji, niższa cena komputerów, zwiększona niezawodność, itp.
 Z drugiej strony tworzenie systemów rozproszonych niesie ze sobą te same ograniczenia i problemy dostępu do współdzielonych zasobów jak wykorzystanie pamięci współdzielonej. Dodatkową komplikacją w tym przypadku jest tworzenie algorytmów korzystających z wielu maszyn jednocześnie. Klasycznym podejściem jest wykorzystanie czasu jako podstawy opracowywania algorytmów synchronizacji. Wprowadzenie dodatkowego czynnika jakim jest czas wynika z opóźnień powstałych w na etapie komunikacji pomiędzy procesami działającymi na odrębnych maszynach, jednakże dodatkowa zmienna znacznie zwiększa złożoność i nakład pracy \autocite{lamport1978time}.
 
-## Współczesne trendy - Architektura mikroserwisowa
+## Współczesne trendy 
+
+### Architektura mikroserwisowa
+
+Mikroserwisy często używają resta.
+
+### Representational State Transfer
 
 ## Java
 
@@ -31,17 +37,40 @@ Model ten jest powszechnie stosowany nie tylko dla aplikacji w Javie, ale równi
 
 ## JavaScript
 
-Brak standardowych rozwiązań. Przedstawienie popularnych podejść z wielu, wynikających z szerokiej społeczności.
+TODO: Brak standardowych rozwiązań. Przedstawienie popularnych podejść z wielu, wynikających z szerokiej społeczności. Oparte na eventach. 
 
-### Reaktor
+### libuv
 
-libuv jako podstawa działania Node.js. Wady i zalety asynchroniczności dla modelu przyjętego w Node.js
+libuv jest to natywna biblioteka stanowiącą warstwę abstrakcji nad różnymi urządzeniami wejścia/wyjścia do wykonywania na nich asynchronicznych operacji. Została zaprojektowana z myślą o Node.js, lecz znalazła zastosowanie w innych projektach.  
+W skład jej możliwości wchodzą:
+ - asynchroniczna obsługa połączeń sieciowych poprzez TCP oraz UDP
+ - asynchroniczna obsługa plików oraz operacji na systemie plików
+ - zdarzenia systemu plików
+ - komunikacja między procesowa
+ - procesy pomne
+ - pula wątków
+ - obsługa przerwań
+ - zegar wysokiej rozdzielczości
+ - obsługa wątków i ich synchronizacja
+
+libuv udostępnia użytkownikom 2 interfejsy do pracy z wejściem/wyjściem: uchwyt (ang. handle) oraz zapytanie (ang. request).  
+Uchwyty stanowią obiekty o długim czasie życia, zdolne do przeprowadzania pewnych operacji w czasie aktywności, przykładowo uchwyt może implementować przyjmowanie połączeń na serwerze TCP i być aktywowany za każdym razem gdy pojawia się nowe połączenie.  
+Zapytanie reprezentuje operacje o krótkim czasie życia. Mogą być wywoływane w cyklu obsługi uchwytu lub samodzielnie. Powyższe abstrakcje służą użytkownikom do interakcji z pętlą zdarzeń (ang. event loop).  
+Pętla wejścia/wyjścia lub też pętla zdarzeń jest kluczową częścią libuv. Odpowiada ona za przetwarzanie wszystkich operacji związanych z wejściem/wyjściem, używając niecodziennego, jednowątkowego asynchronicznego obsługi tychże operacji. Wszystkie działania sieciowe wykonywane są w jednym wątku posługując się nieblokującymi gniazdami (ang. socket), które są cyklicznie odpytywane.  
+W przeciwieństwie do sieciowego wejścia/wyjścia, obsługa plików jest bazowana na blokującym (synchronicznym) dostępie wykorzystującym pulę wątków. Każdy wątek z puli może niezależnie przetwarzać operacje na pliku.  
+Takie podejście do równoległości jest przykładem wzorca "reaktor".
+
+### Wzorzec reaktor
+
+Opisać model reaktor
 
 ## Elixir
 
-### OTP
+Erlang, a zatem i Elixir, to nie tylko języki programowania, ale również zestaw narzędzi i wzorców programistycznych zwanych *Open Telecom Platform* (OTP). 
 
-Erlang to nie tylko język programowania, ale również zestaw narzędzi i wzorców programistycznych zwanych *Open Telecom Platform* (OTP). Mimo swojej nazwy, jest to zbiór bibliotek ogólnego zastosowania, wprowadzający standardowe rozwiązania dla powszechnych problemów. Dodatkowo zawiera narzędzia do rozproszonej komunikacji, wykrywania błędów czy przeładowywania kodu działającego systemu. OTP wprowadza struktury generyczne dla różnych projektów informatycznych, które mają ułatwić pracę programistom, przykładowo standaryzowanej struktury plików projektowych, standardową bibliotekę powszechnie stosowanych funkcjonalności oraz zbiór tzw. behaviour (ang. zachowanie) będących wzorcami projektowymi dla różnorodnych systemów. Dzięki temu nowy pracownik zespołu może zauważyć znane wzorce, co ułatwia zapoznanie się z istniejącą bazą kodu.  
+### Open Telecom Platform
+
+Mimo swojej nazwy, OTP jest zbiorem bibliotek ogólnego zastosowania, wprowadzający standardowe rozwiązania dla powszechnych problemów. Dodatkowo zawiera narzędzia do rozproszonej komunikacji, wykrywania błędów czy przeładowywania kodu działającego systemu. OTP wprowadza struktury generyczne dla różnych projektów informatycznych, które mają ułatwić pracę programistom, przykładowo standaryzowanej struktury plików projektowych, standardową bibliotekę powszechnie stosowanych funkcjonalności oraz zbiór tzw. behaviour (ang. zachowanie) będących wzorcami projektowymi dla różnorodnych systemów. Dzięki temu nowy pracownik zespołu może zauważyć znane wzorce, co ułatwia zapoznanie się z istniejącą bazą kodu.  
 Podejście do współbieżności w Erlangu/OTP znacznie różni się od powszechnie stosowanego modelu dzielonej pamięci z blokadami. W tym przypadku wykorzystywany są lekkie procesy zarządzane przez wirtualną maszynę. Procesy te są od siebie całkowicie odizolowane, nie jest wykorzystana dzielona pamięć. Ze względu na taką separacje, komunikacja pomiędzy procesami odbywa się poprzez przesyłane między sobą wiadomości (ang. *message passing*). Dzielone informacje są kopiowane i przesyłane do innego procesu. Dzięki temu nie jest możliwa wielodostępowa modyfikacja danych, co zapobiega powstawaniu anomalii. Jednakże takie podejście nie jest bez wad, gdyż powielanie dużych bloków pamięci może być kosztowne.[patrz \ref{model-aktorowy}]  
 W celu zapewnienia wysokiej niezawodności i odporności na błędy wprowadzone zostało jedno z ważniejszych *zachowań* OTP, "Supervisor" (ang. nadzorca). Jest on odpowiedzialny za tworzenie i monitorowanie stanu procesów wykonawczych. W sytuacji gdy proces wykonawczy, w wyniku błędu, przerwie pracę, wtedy nadzorca jest w stanie przywrócić poprawne funkcjonowanie systemu przywracając wykonawcę do normalnego stanu. Nadzorcy, będąc jedynie typem zachowania, mogą być traktowani jako zwykłe procesy wykonawcze, a zatem ich stan może być monitorowany przez innego nadzorcę tworząc w drzewa nadzorcze.  
 

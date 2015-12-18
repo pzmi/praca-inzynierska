@@ -29,7 +29,7 @@ Przewidziano następujące komponenty:
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=110]{graphics/multitiered-application.png}
+\includegraphics[resolution=150]{graphics/multitiered-application.png}
 \caption{Architektura wielowarstwowa \autocite{jendrock2014jee}}
 \end{figure}
 
@@ -43,6 +43,7 @@ TODO: Brak standardowych rozwiązań. Przedstawienie popularnych podejść z wie
 
 libuv jest to natywna biblioteka stanowiącą warstwę abstrakcji nad różnymi urządzeniami wejścia/wyjścia do wykonywania na nich asynchronicznych operacji. Została zaprojektowana z myślą o Node.js, lecz znalazła zastosowanie w innych projektach.  
 W skład jej możliwości wchodzą:
+
  - asynchroniczna obsługa połączeń sieciowych poprzez TCP oraz UDP
  - asynchroniczna obsługa plików oraz operacji na systemie plików
  - zdarzenia systemu plików
@@ -58,11 +59,25 @@ Uchwyty stanowią obiekty o długim czasie życia, zdolne do przeprowadzania pew
 Zapytanie reprezentuje operacje o krótkim czasie życia. Mogą być wywoływane w cyklu obsługi uchwytu lub samodzielnie. Powyższe abstrakcje służą użytkownikom do interakcji z pętlą zdarzeń (ang. event loop).  
 Pętla wejścia/wyjścia lub też pętla zdarzeń jest kluczową częścią libuv. Odpowiada ona za przetwarzanie wszystkich operacji związanych z wejściem/wyjściem, używając niecodziennego, jednowątkowego asynchronicznego obsługi tychże operacji. Wszystkie działania sieciowe wykonywane są w jednym wątku posługując się nieblokującymi gniazdami (ang. socket), które są cyklicznie odpytywane.  
 W przeciwieństwie do sieciowego wejścia/wyjścia, obsługa plików jest bazowana na blokującym (synchronicznym) dostępie wykorzystującym pulę wątków. Każdy wątek z puli może niezależnie przetwarzać operacje na pliku.  
-Takie podejście do równoległości jest przykładem wzorca "reaktor".
+Takie podejście do równoległości jest przykładem wzorca *Reaktor*.
 
-### Wzorzec reaktor
+### Wzorzec Reaktor
 
-Opisać model reaktor
+TODO: 
+- opis
+- przepisać diagramki sekwencji z reactor-simens
+- jakiś obrazek z ilustracją reaktora
+
+Wzorzec Reaktor jest zaprojektowany do obsługi zapytań przychodzących równolegle do systemu z jednego lub więcej klientów. Każda funkcjonalność systemu jest reprezentowana przez osobne jednostki przetwarzania odpowiedzialne za obsługę jedynie zapytań przeznaczonych dla nich. Za podział zapytań pomiędzy jednostki przetwarzania odpowiedzialny jest synchroniczny demultiplekser.  
+Kluczowymi elementami wzorca Reaktor są: uchwyty (ang. handle), demultiplekser zdarzeń (ang. event demultiplexer), dyspozytor wejściowy (ang. initiation dispatcher) oraz jednostki obsługi zdarzeń (ang. event handler).  
+Uchwyty są zasobami zarządzanymi przez system operacyjny. Wśród nich znajdują się między innymi połączenia sieciowe czy otwarte pliki.  
+Synchroniczny demultiplekser zdarzeń blokuje nadchodzące zdarzenia w oczekiwaniu na uchwyty i zwalnia blokadę kiedy operacja może zostać przeprowadzona na uchwycie bez potrzeby blokowania.  
+Dyspozytor wejściowy definiuje interfejs do rejestracji, derejestracji i dyspozycji jednostek obsługi zdarzeń. Dyspozytor jest informowany o nowych zdarzeniach w systemie, w wyniku czego wybiera odpowiednią jednostkę obsługi zdarzenia do otrzymanej akcji.  
+Jednostka obsługi zdarzeń implementują logikę przetwarzania przychodzących zdarzeń. System rejestruje takie jednostki w dyspozytorze wejściowym dla konkretnych typów zdarzeń. Kiedy jedno z nich zostanie odebrane, dyspozytor rozwiązuje odpowiednią jednostkę obsługi zdarzeń i wywołuje jej kod obsługi.
+
+TODO: diagram sekwencji
+
+System rejestrując jednostkę obsługi zdarzeń w dyspozytorze zaznacza o jakich typach zdarzeń ma ona być powiadamiana, gdy ono wystąpi na powiązanym uchwycie. Po zarejestrowaniu wszystkich uchwytów
 
 ## Elixir
 

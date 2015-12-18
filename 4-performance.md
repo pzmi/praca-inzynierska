@@ -5,7 +5,7 @@ Implementacja kilku aplikacji w każdej z przedstawionych technologii. Test obci
 
 ## Proste zapytanie
 
-Proste zapytanie zwracające łańcuch tekstowy.
+Proste zapytanie zwracające łańcuch tekstowy. c10k
 
 ## Czasochłonne obliczenia
 
@@ -13,7 +13,7 @@ Aplikacja wykonująca bardziej wymagające operacje z większym romiarem danych,
 
 ## Ograniczenia wejścia/wyjścia
 
-Wsparcie dla operacji we/wy, np. zapis i odczyt z bazy danych.
+Wsparcie dla operacji we/wy, np. zapis i odczyt z bazy danych (albo z pliku)
 
 ## Wnioski
 

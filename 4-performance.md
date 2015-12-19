@@ -1,4 +1,3 @@
-
 # Wydajność
 
 Implementacja kilku aplikacji w każdej z przedstawionych technologii. Test obciążeniowy każdej z implementacji w celu porównania osiągów.

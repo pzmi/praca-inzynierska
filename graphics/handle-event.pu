@@ -1,0 +1,22 @@
+@startuml
+skinparam monochrome true
+skinparam backgroundColor transparent
+skinparam classBackgroundColor transparent
+skinparam style strictuml
+
+participant "Aplikacja" as A
+participant "Dyspozytor" as D
+participant "J. przetwarzania" as J
+
+activate A
+A -> D: inicjalizuj Dyspozytora
+A -> D: zarejestruj J. przetwarzania
+D -> J: podaj uchwyt
+A -> D: obsłuż zdarzenie
+deactivate A
+activate D
+D -> Uchwyt: wybierz
+D -> J: obsłuż zdarzenie
+deactivate D
+activate J
+@enduml

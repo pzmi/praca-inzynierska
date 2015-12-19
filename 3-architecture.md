@@ -37,7 +37,7 @@ Model ten jest powszechnie stosowany nie tylko dla aplikacji w Javie, ale równi
 
 ## JavaScript
 
-TODO: Brak standardowych rozwiązań. Przedstawienie popularnych podejść z wielu, wynikających z szerokiej społeczności. Oparte na eventach. 
+TODO: Oparte na eventach. Brak standardowych rozwiązań. Przedstawienie popularnych podejść z wielu, wynikających z szerokiej społeczności, jedyne pewne to node. 
 
 ### libuv
 
@@ -63,11 +63,6 @@ Takie podejście do równoległości jest przykładem wzorca *Reaktor*.
 
 ### Wzorzec Reaktor
 
-TODO: 
-- opis
-- przepisać diagramki sekwencji z reactor-simens
-- jakiś obrazek z ilustracją reaktora
-
 Wzorzec Reaktor jest zaprojektowany do obsługi zapytań przychodzących równolegle do systemu z jednego lub więcej klientów. Każda funkcjonalność systemu jest reprezentowana przez osobne jednostki przetwarzania odpowiedzialne za obsługę jedynie zapytań przeznaczonych dla nich. Za podział zapytań pomiędzy jednostki przetwarzania odpowiedzialny jest synchroniczny demultiplekser.  
 Kluczowymi elementami wzorca Reaktor są: uchwyty (ang. handle), demultiplekser zdarzeń (ang. event demultiplexer), dyspozytor wejściowy (ang. initiation dispatcher) oraz jednostki obsługi zdarzeń (ang. event handler).  
 Uchwyty są zasobami zarządzanymi przez system operacyjny. Wśród nich znajdują się między innymi połączenia sieciowe czy otwarte pliki.  
@@ -75,9 +70,15 @@ Synchroniczny demultiplekser zdarzeń blokuje nadchodzące zdarzenia w oczekiwan
 Dyspozytor wejściowy definiuje interfejs do rejestracji, derejestracji i dyspozycji jednostek obsługi zdarzeń. Dyspozytor jest informowany o nowych zdarzeniach w systemie, w wyniku czego wybiera odpowiednią jednostkę obsługi zdarzenia do otrzymanej akcji.  
 Jednostka obsługi zdarzeń implementują logikę przetwarzania przychodzących zdarzeń. System rejestruje takie jednostki w dyspozytorze wejściowym dla konkretnych typów zdarzeń. Kiedy jedno z nich zostanie odebrane, dyspozytor rozwiązuje odpowiednią jednostkę obsługi zdarzeń i wywołuje jej kod obsługi.
 
-TODO: diagram sekwencji
+\begin{figure}[htbp]
+\centering
+\input{graphics/handle-event.pdf_tex}
+\caption{Sekwencja działania Reaktora}
+\end{figure}
 
-System rejestrując jednostkę obsługi zdarzeń w dyspozytorze zaznacza o jakich typach zdarzeń ma ona być powiadamiana, gdy ono wystąpi na powiązanym uchwycie. Po zarejestrowaniu wszystkich uchwytów
+System rejestrując jednostkę obsługi zdarzeń w dyspozytorze zaznacza o jakich typach zdarzeń ma ona być powiadamiana, gdy ono wystąpi na powiązanym uchwycie. Po zarejestrowaniu wszystkich jednostek obsługi zdarzeń startowana jest pętla obsługi zdarzeń (ang. event loop) dyspozytora. Uchwyty zostają powiązane z zarejestrowanymi z jednostkami obsługi, a demultiplekser czeka na zdarzenia przychodzące na uchwytach. Po nadejściu jednego z nich demultiplekser zawiadamia dyspozytora, że uchwyt jest gotowy do rozpoczęcia przetwarzania danych. Ten z kolei, używając typu źródła zdarzenia, wybiera jednostkę obsługi i wywołuje jej kod.  
+Takie podejście pociąga za sobą szereg zalet jak i wad. Przede wszystkim zapewnia łatwą kontrolę nad współbieżnością. Reaktor kolejkuje zdarzenia na poziomie demultipleksowania i delegacji pracy do jednostek obsługi. Jest to zwykle wystarczające, aby wyeliminować potrzebę stosowania bardziej skomplikowanych metod synchronizacji i blokad w aplikacji. Dodatkowo wzorzec ten ułatwia rozdzielenie odpowiedzialności pomiędzy komponenty systemu. Demultipleksowanie oraz delegacja jest niezależna od aplikacji i może być reużywana w różnych projektach. Część funkcjonalna systemu jest rozdzielona pomiędzy jednostki obsługi zdarzeń i każda z nich jest odpowiedzialna za obsługę konkretnych typów zapytań.  
+Jednakże ceną przetwarzania jednowątkowego jest brak możliwości wywłaszczenia wątku, jednostki obsługi zdarzeń wykonują pracę nieprzerwanie. Z tego wynika, że żadne z nich nie powinno wykonywać blokujących operacji, ponieważ w takim przypadku jeden zablokowałby cały proces ograniczając responsywność systemu. Co więcej, aplikacje napisane z wykorzystaniem wzorca Rektor mogą być trudniejsze do analizy i rozwiązywania błędów, ze względu na odwrócony proces przepływu sterowania. Implementacja tego wzorca jest ograniczona ze względu na możliwości systemu operacyjnego, który musi wspierać nieblokujące operacje. Ten problem można obejść wykorzystując wiele wątków, w których przetwarzanie odbywa się w sposób blokujący, jednak wyzbywając się korzyści wynikających z braku przełączania kontekstu. 
 
 ## Elixir
 

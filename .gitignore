@@ -15,3 +15,5 @@
 4-performance.tex
 6-productivity.tex
 *.out
+*.svg
+*.pdf_tex

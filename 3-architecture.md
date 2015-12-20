@@ -33,11 +33,23 @@ Przewidziano następujące komponenty:
 \caption{Architektura wielowarstwowa \autocite{jendrock2014jee}}
 \end{figure}
 
-Model ten jest powszechnie stosowany nie tylko dla aplikacji w Javie, ale również przy użyciu wielu innych technologii.\autocite{eisele2015modern, jendrock2014jee}
+Model ten jest powszechnie stosowany nie tylko dla aplikacji w Javie, ale również przy użyciu wielu innych technologii. \autocite{eisele2015modern, jendrock2014jee}
 
 ## JavaScript
 
-TODO: Oparte na eventach. Brak standardowych rozwiązań. Przedstawienie popularnych podejść z wielu, wynikających z szerokiej społeczności, jedyne pewne to node. 
+Biorąc pod uwagę fakt, że JavaScript został stworzony do zastosowań w aplikacjach klienckich, środowisko to nie posiada ustandaryzowanych wzorców projektowania i tworzenia systemów informatycznych. Ze względu na dużą i różnorodną społeczność wielu programistów o odmiennym podłożu zawodowym, nieustannie powstaje wiele bibliotek i tworzonych jest wiele modeli aplikacyjnych, lecz jak dotąd nie wyłonił się z nich żaden dominujący paradygmat. Jedynym wspólnym ich elementem jest Node.js, lecz biblioteka ta nie dyktuje modeli ani wzorców architektonicznych poza posługiwaniem się zdarzeniami i odwołaniami obsługi tychże.    
+Programowanie w JavaScript w dużej mierze opiera się na obsłudze zdarzeń. Łatwo to zauważyć na przykładzie aplikacji przeglądarkowych, gdzie zdarzenia są wywoływane przez interakcje użytkownika z interfejsem, na przykład kliknięcia myszy czy przeciąganie obiektów. Z perspektywy projektu języka programowania w JavaScript wprowadzono ułatwienia dla programowania sterowanego zdarzeniami (ang. *event-driven programming*). Najważniejszym z nich jest wprowadzenie funkcji wyższego rzędu. Dzięki nim możliwe jest przekazywanie jako parametrów funkcji innych funkcji jako odwołania do wykonanej akcji.
+
+~~~~{.JavaScript .numberLines caption="Obsługa zdarzeń kliknięcia"}
+function handleClick() {
+    alert("Button clicked!");
+};
+
+var button = document.getElementById("button");
+button.addEventListener("click", handleClick);
+~~~~
+
+W linijce 6 powyższego listingu do obiektu button została dodana obsługa zdarzenia. Jako pierwszy parametr metody *addEventListener* przekazano typ akcji - kliknięcie (*"click"*) oraz drugi parametr będący nazwą funkcji, która zostanie wykonana przy wykonaniu zdefiniowanej akcji.
 
 ### libuv
 
@@ -54,17 +66,17 @@ W skład jej możliwości wchodzą:
  - zegar wysokiej rozdzielczości
  - obsługa wątków i ich synchronizacja
 
-libuv udostępnia użytkownikom 2 interfejsy do pracy z wejściem/wyjściem: uchwyt (ang. handle) oraz zapytanie (ang. request).  
+libuv udostępnia użytkownikom 2 interfejsy do pracy z wejściem/wyjściem: uchwyt (ang. *handle*) oraz zapytanie (ang. *request*).  
 Uchwyty stanowią obiekty o długim czasie życia, zdolne do przeprowadzania pewnych operacji w czasie aktywności, przykładowo uchwyt może implementować przyjmowanie połączeń na serwerze TCP i być aktywowany za każdym razem gdy pojawia się nowe połączenie.  
-Zapytanie reprezentuje operacje o krótkim czasie życia. Mogą być wywoływane w cyklu obsługi uchwytu lub samodzielnie. Powyższe abstrakcje służą użytkownikom do interakcji z pętlą zdarzeń (ang. event loop).  
-Pętla wejścia/wyjścia lub też pętla zdarzeń jest kluczową częścią libuv. Odpowiada ona za przetwarzanie wszystkich operacji związanych z wejściem/wyjściem, używając niecodziennego, jednowątkowego asynchronicznego obsługi tychże operacji. Wszystkie działania sieciowe wykonywane są w jednym wątku posługując się nieblokującymi gniazdami (ang. socket), które są cyklicznie odpytywane.  
+Zapytanie reprezentuje operacje o krótkim czasie życia. Mogą być wywoływane w cyklu obsługi uchwytu lub samodzielnie. Powyższe abstrakcje służą użytkownikom do interakcji z pętlą zdarzeń (ang. *event loop*).  
+Pętla wejścia/wyjścia lub też pętla zdarzeń jest kluczową częścią libuv. Odpowiada ona za przetwarzanie wszystkich operacji związanych z wejściem/wyjściem, używając niecodziennego, jednowątkowego asynchronicznego obsługi tychże operacji. Wszystkie działania sieciowe wykonywane są w jednym wątku posługując się nieblokującymi gniazdami (ang. *socket*), które są cyklicznie odpytywane.  
 W przeciwieństwie do sieciowego wejścia/wyjścia, obsługa plików jest bazowana na blokującym (synchronicznym) dostępie wykorzystującym pulę wątków. Każdy wątek z puli może niezależnie przetwarzać operacje na pliku.  
 Takie podejście do równoległości jest przykładem wzorca *Reaktor*.
 
 ### Wzorzec Reaktor
 
 Wzorzec Reaktor jest zaprojektowany do obsługi zapytań przychodzących równolegle do systemu z jednego lub więcej klientów. Każda funkcjonalność systemu jest reprezentowana przez osobne jednostki przetwarzania odpowiedzialne za obsługę jedynie zapytań przeznaczonych dla nich. Za podział zapytań pomiędzy jednostki przetwarzania odpowiedzialny jest synchroniczny demultiplekser.  
-Kluczowymi elementami wzorca Reaktor są: uchwyty (ang. handle), demultiplekser zdarzeń (ang. event demultiplexer), dyspozytor wejściowy (ang. initiation dispatcher) oraz jednostki obsługi zdarzeń (ang. event handler).  
+Kluczowymi elementami wzorca Reaktor są: uchwyty, demultiplekser zdarzeń (ang. *event demultiplexer*), dyspozytor wejściowy (ang. *initiation dispatcher*) oraz jednostki obsługi zdarzeń (ang. *event handler*).  
 Uchwyty są zasobami zarządzanymi przez system operacyjny. Wśród nich znajdują się między innymi połączenia sieciowe czy otwarte pliki.  
 Synchroniczny demultiplekser zdarzeń blokuje nadchodzące zdarzenia w oczekiwaniu na uchwyty i zwalnia blokadę kiedy operacja może zostać przeprowadzona na uchwycie bez potrzeby blokowania.  
 Dyspozytor wejściowy definiuje interfejs do rejestracji, derejestracji i dyspozycji jednostek obsługi zdarzeń. Dyspozytor jest informowany o nowych zdarzeniach w systemie, w wyniku czego wybiera odpowiednią jednostkę obsługi zdarzenia do otrzymanej akcji.  
@@ -76,9 +88,9 @@ Jednostka obsługi zdarzeń implementują logikę przetwarzania przychodzących 
 \caption{Sekwencja działania Reaktora}
 \end{figure}
 
-System rejestrując jednostkę obsługi zdarzeń w dyspozytorze zaznacza o jakich typach zdarzeń ma ona być powiadamiana, gdy ono wystąpi na powiązanym uchwycie. Po zarejestrowaniu wszystkich jednostek obsługi zdarzeń startowana jest pętla obsługi zdarzeń (ang. event loop) dyspozytora. Uchwyty zostają powiązane z zarejestrowanymi z jednostkami obsługi, a demultiplekser czeka na zdarzenia przychodzące na uchwytach. Po nadejściu jednego z nich demultiplekser zawiadamia dyspozytora, że uchwyt jest gotowy do rozpoczęcia przetwarzania danych. Ten z kolei, używając typu źródła zdarzenia, wybiera jednostkę obsługi i wywołuje jej kod.  
+System rejestrując jednostkę obsługi zdarzeń w dyspozytorze zaznacza o jakich typach zdarzeń ma ona być powiadamiana, gdy ono wystąpi na powiązanym uchwycie. Po zarejestrowaniu wszystkich jednostek obsługi zdarzeń startowana jest pętla obsługi zdarzeń (ang. *event loop*) dyspozytora. Uchwyty zostają powiązane z zarejestrowanymi z jednostkami obsługi, a demultiplekser czeka na zdarzenia przychodzące na uchwytach. Po nadejściu jednego z nich demultiplekser zawiadamia dyspozytora, że uchwyt jest gotowy do rozpoczęcia przetwarzania danych. Ten z kolei, używając typu źródła zdarzenia, wybiera jednostkę obsługi i wywołuje jej kod.  
 Takie podejście pociąga za sobą szereg zalet jak i wad. Przede wszystkim zapewnia łatwą kontrolę nad współbieżnością. Reaktor kolejkuje zdarzenia na poziomie demultipleksowania i delegacji pracy do jednostek obsługi. Jest to zwykle wystarczające, aby wyeliminować potrzebę stosowania bardziej skomplikowanych metod synchronizacji i blokad w aplikacji. Dodatkowo wzorzec ten ułatwia rozdzielenie odpowiedzialności pomiędzy komponenty systemu. Demultipleksowanie oraz delegacja jest niezależna od aplikacji i może być reużywana w różnych projektach. Część funkcjonalna systemu jest rozdzielona pomiędzy jednostki obsługi zdarzeń i każda z nich jest odpowiedzialna za obsługę konkretnych typów zapytań.  
-Jednakże ceną przetwarzania jednowątkowego jest brak możliwości wywłaszczenia wątku, jednostki obsługi zdarzeń wykonują pracę nieprzerwanie. Z tego wynika, że żadne z nich nie powinno wykonywać blokujących operacji, ponieważ w takim przypadku jeden zablokowałby cały proces ograniczając responsywność systemu. Co więcej, aplikacje napisane z wykorzystaniem wzorca Rektor mogą być trudniejsze do analizy i rozwiązywania błędów, ze względu na odwrócony proces przepływu sterowania. Implementacja tego wzorca jest ograniczona ze względu na możliwości systemu operacyjnego, który musi wspierać nieblokujące operacje. Ten problem można obejść wykorzystując wiele wątków, w których przetwarzanie odbywa się w sposób blokujący, jednak wyzbywając się korzyści wynikających z braku przełączania kontekstu. 
+Jednakże ceną przetwarzania jednowątkowego jest brak możliwości wywłaszczenia wątku, jednostki obsługi zdarzeń wykonują pracę nieprzerwanie. Z tego wynika, że żadne z nich nie powinno wykonywać blokujących operacji, ponieważ w takim przypadku jeden zablokowałby cały proces ograniczając responsywność systemu. Co więcej, aplikacje napisane z wykorzystaniem wzorca Rektor mogą być trudniejsze do analizy i rozwiązywania błędów, ze względu na odwrócony proces przepływu sterowania. Implementacja tego wzorca jest ograniczona ze względu na możliwości systemu operacyjnego, który musi wspierać nieblokujące operacje. Ten problem można obejść wykorzystując wiele wątków, w których przetwarzanie odbywa się w sposób blokujący, jednak wyzbywając się korzyści wynikających z braku przełączania kontekstu.\autocite{schmidt1995reactor}
 
 ## Elixir
 
@@ -86,9 +98,9 @@ Erlang, a zatem i Elixir, to nie tylko języki programowania, ale również zest
 
 ### Open Telecom Platform
 
-Mimo swojej nazwy, OTP jest zbiorem bibliotek ogólnego zastosowania, wprowadzający standardowe rozwiązania dla powszechnych problemów. Dodatkowo zawiera narzędzia do rozproszonej komunikacji, wykrywania błędów czy przeładowywania kodu działającego systemu. OTP wprowadza struktury generyczne dla różnych projektów informatycznych, które mają ułatwić pracę programistom, przykładowo standaryzowanej struktury plików projektowych, standardową bibliotekę powszechnie stosowanych funkcjonalności oraz zbiór tzw. behaviour (ang. zachowanie) będących wzorcami projektowymi dla różnorodnych systemów. Dzięki temu nowy pracownik zespołu może zauważyć znane wzorce, co ułatwia zapoznanie się z istniejącą bazą kodu.  
+Mimo swojej nazwy, OTP jest zbiorem bibliotek ogólnego zastosowania, wprowadzający standardowe rozwiązania dla powszechnych problemów. Dodatkowo zawiera narzędzia do rozproszonej komunikacji, wykrywania błędów czy przeładowywania kodu działającego systemu. OTP wprowadza struktury generyczne dla różnych projektów informatycznych, które mają ułatwić pracę programistom, przykładowo standaryzowanej struktury plików projektowych, standardową bibliotekę powszechnie stosowanych funkcjonalności oraz zbiór tzw. behaviour (ang. *zachowanie*) będących wzorcami projektowymi dla różnorodnych systemów. Dzięki temu nowy pracownik zespołu może zauważyć znane wzorce, co ułatwia zapoznanie się z istniejącą bazą kodu.  
 Podejście do współbieżności w Erlangu/OTP znacznie różni się od powszechnie stosowanego modelu dzielonej pamięci z blokadami. W tym przypadku wykorzystywany są lekkie procesy zarządzane przez wirtualną maszynę. Procesy te są od siebie całkowicie odizolowane, nie jest wykorzystana dzielona pamięć. Ze względu na taką separacje, komunikacja pomiędzy procesami odbywa się poprzez przesyłane między sobą wiadomości (ang. *message passing*). Dzielone informacje są kopiowane i przesyłane do innego procesu. Dzięki temu nie jest możliwa wielodostępowa modyfikacja danych, co zapobiega powstawaniu anomalii. Jednakże takie podejście nie jest bez wad, gdyż powielanie dużych bloków pamięci może być kosztowne.[patrz \ref{model-aktorowy}]  
-W celu zapewnienia wysokiej niezawodności i odporności na błędy wprowadzone zostało jedno z ważniejszych *zachowań* OTP, "Supervisor" (ang. nadzorca). Jest on odpowiedzialny za tworzenie i monitorowanie stanu procesów wykonawczych. W sytuacji gdy proces wykonawczy, w wyniku błędu, przerwie pracę, wtedy nadzorca jest w stanie przywrócić poprawne funkcjonowanie systemu przywracając wykonawcę do normalnego stanu. Nadzorcy, będąc jedynie typem zachowania, mogą być traktowani jako zwykłe procesy wykonawcze, a zatem ich stan może być monitorowany przez innego nadzorcę tworząc w drzewa nadzorcze.  
+W celu zapewnienia wysokiej niezawodności i odporności na błędy wprowadzone zostało jedno z ważniejszych *zachowań* OTP, "Supervisor" (ang. *nadzorca*). Jest on odpowiedzialny za tworzenie i monitorowanie stanu procesów wykonawczych. W sytuacji gdy proces wykonawczy, w wyniku błędu, przerwie pracę, wtedy nadzorca jest w stanie przywrócić poprawne funkcjonowanie systemu przywracając wykonawcę do normalnego stanu. Nadzorcy, będąc jedynie typem zachowania, mogą być traktowani jako zwykłe procesy wykonawcze, a zatem ich stan może być monitorowany przez innego nadzorcę tworząc w drzewa nadzorcze.  
 
 \begin{figure}[htbp]
 \centering

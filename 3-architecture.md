@@ -9,9 +9,24 @@ Z drugiej strony tworzenie systemów rozproszonych niesie ze sobą te same ogran
 
 ### Architektura mikroserwisowa
 
-Mikroserwisy często używają resta.
+Architektura mikroserwisowa ostatnimi czasy jest częstym tematem pojawiającym się przy w kontekście projektowania systemów informatycznych.  
+Mikroserwisoway styl architektoniczny reprezentuje podejście do wytwarzania oprogramowania jako zboru małych usług, każda działająca jako osobny proces, porozumiewające się za pomocą lekkich protokołów, gdzie częstym wyborem jest HTTP. Usługi te są zbudowane wokół funkcjonalności biznesowych i każda z nich jest niezależnie wdrażana przez zautomatyzowane systemy wdrożeniowe. Założeniem jest, aby usługi wykorzystywały narzędzia scentralizowanego zarządzania w jak najmniejszym stopniu. Każda z implementacji jak i wykorzystywane narzędzia mogą wykorzystywać różne języki programowania i technologie.  
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[resolution=500]{graphics/microservice-example.png}
+\caption{Przykład projektu systemu w architekturze mikroserwisowej\autocite{bastani2015springcloud}}
+\end{figure}
+
+Nie ma formalnej definicji architektury mikroserwisowej, lecz są pewne cechy charakterystyczne, które często pojawiają się w tego typu systemach.  
+Usługi często są wykorzystywane jako reużywalne komponenty. Każdy z nich może być uruchomiony niezależnie i wprowadzanie w nich zmian nie prowadzi do ponownego wdrożenia całości aplikacji, a jedynie jednej z jej części. 
+Nie tylko technologia programowania jest niezależna od architektury, to samo tyczy się trwałych składowisk danych. Usługi nie powinny dzielić jednej bazy danych, tak aby każda z nich była niezależna. Nic nie stoi na przeszkodzie, aby wykorzystać różne technologie przechowywania danych, przykładowo bazę danych relacyjną oraz NoSQL w jednym systemie informatycznym.  
+Taki podział systemu wymaga mechanizmów zewnętrznej komunikacji pomiędzy usługami, których koszt jest dużo wyższy od wywołań wewnątrz aplikacji. W związku z tym funkcjonalności i odpowiedzialności muszą być odpowiednio zaprojektowane i wydzielone, aby zminimalizować konieczność komunikacji pomiędzy komponentami, co wiąże się z dodatkowymi nakładami na projektowanie.
+Również metody komunikacji odgrywają duże znaczenie. W przeszłości do komunikacji rozproszonych systemów wykorzystywana różne technologie i podejście. Dobrym przykładem jest Korporacyjna Szyna Usług (ang. *Enterprise Service Bus*), która skupia wiele skomplikowanych mechanizmów zarządzania usługami, trasowania wiadomości i transformacji danych. Społeczność wspierająca mikroserwisy proponuje wykorzystywanie prostych, lekkich rozwiązań komunikacyjnych. Przykładem tego jest często stosowany protokół HTTP w zastosowaniu interfejsów REST.
 
 ### Representational State Transfer
+
+Representational State Transfer nazywany w skrócie REST
 
 ## Java
 

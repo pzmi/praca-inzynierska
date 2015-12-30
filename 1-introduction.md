@@ -1,4 +1,5 @@
 # Wstęp
 
-Cały wstęp stanowi opis tematu pracy, streszczenie treści.
+TODO: streszczenie pracy, cele
+
 

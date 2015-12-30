@@ -2,14 +2,14 @@
 
 ## Java
 
-Klasteryzacja serwerów aplikacyjnych.
+TODO: skalowanie aplikacji monolitycznych, loadbalancing
 
 ## JavaScript
 
-Biblioteki do rozproszonych systemów Node.js.
+TODO: node-cluster - niskopoziomowa, mikroserwisy
 
 ## Elixir
 
-Distributed Erland i Distributed Elixir. Protokoły komunikacji między węzłami w samym języku.
+TODO: distributed Erlang/Elixir, mikroserwisy
 
 ## Wnioski

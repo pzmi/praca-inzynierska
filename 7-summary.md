@@ -1,1 +1,3 @@
 # Uwagi końcowe
+
+TODO: wnioski

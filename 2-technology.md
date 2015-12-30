@@ -1,5 +1,6 @@
 # Opis technologii
 
+TODO: wstęp do rozdziału
 Języki programowania to nie tylko składania, ale cały ekosystem technologii tworzony wokół nich.
 
 ## Java

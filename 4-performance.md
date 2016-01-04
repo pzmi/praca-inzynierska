@@ -78,21 +78,26 @@ Wirtualna maszyna Javy potrzebuje czasu na tak zwane *rozgrzanie się*. Wtedy do
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/responses.png}
 \caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\label{java:simple:responses}
 \end{figure}
 
-Wykres liczby odpowiedzi na sekundę również odzwierciedla proces optymalizacji. W granicy 60 sekundy testu zauważono zwiększoną liczbę błędnych odpowiedzi. Część zapytań przyjętych przed optymalizacją nie została poprawnie przetworzona.
+Wykres \ref{java:simple:responses} również odzwierciedla proces optymalizacji. W granicy 60 sekundy testu zauważono zwiększoną liczbę błędnych odpowiedzi. Część zapytań przyjętych przed optymalizacją nie została poprawnie przetworzona.  
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/response_percentile.png}
 \caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\label{java:simple:response_percentile}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/latency_percentile.png}
 \caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\label{java:simple:latency_percentile}
 \end{figure}
+
+Rysunki \ref{java:simple:response_percentile, java:simple:latency_percentile} przedstawiają dane jedynie dla poprawnie przetworzonych zapytań. Czas odpowiedzi jest różnicą czasu otrzymania pełnej odpowiedzi od czasu wysłania zapytania. Opóźnienie stanowi czas, który upłynął od wyzłania zapytania do otrzymania pierwszego bajta odpowiedzi. W granicach 20:50:10 zauważono zmianę zarówno w czasie odpowiedzi jak i opóźnieniu. Została ona poprzedzona utratą części przetwarzanych zapytań, wywołaną uruchomieniem odśmiecacza pamięci (ang. *garbage collector*). Po tym zabiegu czasy poporawiły się i zostały zakwalifikowane do niższej kategorii na wykresach percentyli.
 
 \clearpage
 

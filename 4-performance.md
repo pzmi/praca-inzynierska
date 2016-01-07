@@ -1,8 +1,8 @@
 # Wydajność
 
-TODO: opis kodu i wykresów, tabelki, podsumowania, wnioski
+TODO: kod
 
-Wydajność technologii można mierzyć pod wieloma róznymi aspektami, a na otrzymane wyniki wpływa duża liczba czynników. Przedstawiane środowiska programistyczne zostały przetestowane pod kontem wydajności w kilku odmiennych scenariuszach.  
+Wydajność technologii można mierzyć pod wieloma różnymi aspektami, a na otrzymane wyniki wpływa duża liczba czynników. Przedstawiane środowiska programistyczne zostały przetestowane pod kontem wydajności w kilku odmiennych scenariuszach.
 
 Wybrano 4 przypadki w 3 kategoriach:
 
@@ -14,7 +14,7 @@ Wybrano 4 przypadki w 3 kategoriach:
  - Ograniczenia wejścia/wyjścia
      + operacje na systemie plików
 
-Wyżej wymienione sytuacje są powszechnie spotykane we w współczesnych systemach informatycznych.  
+Wyżej wymienione sytuacje są powszechnie spotykane we w współczesnych systemach informatycznych.
 
 Badania przeprowadzono na sprzęcie o parametrach:
 
@@ -48,7 +48,7 @@ Test polega na wykonaniu metody HTTP GET na serwerze zwracającym prosty łańcu
 \caption{Wykres czasu odpowiedzi na zapytania}
 \end{figure}
 
-Na połowę zapytań otrzymano odpowiedź w czasie poniżej 800 milisekund. Nieznaczna cześć wysłanych rządań została oznaczona jako błędne.
+Na połowę zapytań otrzymano odpowiedź w czasie poniżej 800 milisekund. Nieznaczna cześć wysłanych żądań została oznaczona jako błędne.
 
 \begin{figure}[htbp]
 \centering
@@ -56,7 +56,7 @@ Na połowę zapytań otrzymano odpowiedź w czasie poniżej 800 milisekund. Niez
 \caption{Wykres aktywnych użytkowników w czasie trwania testu}
 \end{figure}
 
-Liczba aktywnych użytkowników przedstawia zapytania oczekujące na odpowiedź w danej chwili czasu. Na wykresie liczba aktywnych użytkowników rośnie w przybliżeniu jednostannie. Po wysłaniu ostatniego rządania ostatni użytkownik otrzymał odpowiedź po 30 sekundach.
+Liczba aktywnych użytkowników przedstawia zapytania oczekujące na odpowiedź w danej chwili czasu. Na wykresie liczba aktywnych użytkowników rośnie w przybliżeniu jednostajnie. Po wysłaniu ostatniego żądania ostatni użytkownik otrzymał odpowiedź po 30 sekundach.
 
 \begin{figure}[htbp]
 \centering
@@ -72,7 +72,7 @@ Większość czasów odpowiedzi plasuje się na lewym krańcu wykresu. Występuj
 \caption{Wykres liczby zapytań na sekundę w czasie testu}
 \end{figure}
 
-Wirtualna maszyna Javy potrzebuje czasu na tak zwane *rozgrzanie się*. Wtedy dokonuje automatycznej optymalizacji kodu bajtowego. Zjawisko to można zaobserwować na powyższym wykresie. Na początku testu wiele zapytań zostało oznaczonych jako błędnych, po dokonaniu poprawek przez maszynę wirtualną liczba przyjmowanych zapytań na sekundę ustabilizowała się. 
+Wirtualna maszyna Javy potrzebuje czasu na tak zwane *rozgrzanie się*. Wtedy dokonuje automatycznej optymalizacji kodu bajtowego. Zjawisko to można zaobserwować na powyższym wykresie. Na początku testu wiele zapytań zostało oznaczonych jako błędnych, po dokonaniu poprawek przez maszynę wirtualną liczba przyjmowanych zapytań na sekundę ustabilizowała się.
 
 \begin{figure}[htbp]
 \centering
@@ -81,7 +81,7 @@ Wirtualna maszyna Javy potrzebuje czasu na tak zwane *rozgrzanie się*. Wtedy do
 \label{java:simple:responses}
 \end{figure}
 
-Wykres \ref{java:simple:responses} również odzwierciedla proces optymalizacji. W granicy 60 sekundy testu zauważono zwiększoną liczbę błędnych odpowiedzi. Część zapytań przyjętych przed optymalizacją nie została poprawnie przetworzona.  
+Wykres \ref{java:simple:responses} również odzwierciedla proces optymalizacji. W granicy 60 sekundy testu zauważono zwiększoną liczbę błędnych odpowiedzi. Część zapytań przyjętych przed optymalizacją nie została poprawnie przetworzona.
 
 \begin{figure}[htbp]
 \centering
@@ -99,9 +99,9 @@ Wykres \ref{java:simple:responses} również odzwierciedla proces optymalizacji.
 
 Rysunki \ref{java:simple:response_percentile},\ref{java:simple:latency_percentile} przedstawiają dane jedynie dla poprawnie przetworzonych zapytań. Czas odpowiedzi jest różnicą czasu otrzymania pełnej odpowiedzi od czasu wysłania zapytania. Opóźnienie stanowi czas, który upłynął od wysłania zapytania do otrzymania pierwszego bajta odpowiedzi. W granicach 20:50:10 zauważono zmianę zarówno w czasie odpowiedzi jak i opóźnieniu. Została ona poprzedzona utratą części przetwarzanych zapytań, wywołaną uruchomieniem odśmiecacza pamięci (ang. *garbage collector*). Po tym zabiegu czasy poprawiły się i zostały zakwalifikowane do niższej kategorii na wykresach percentyli.
 
-| W sumie                | OK       | KO       |        |
+|                        | W sumie  | OK       | KO     |
 |------------------------|----------|----------|--------|
-|                        | 350000   | 342147   | 7853   |
+| Zapytania              | 350000   | 342147   | 7853   |
 | Średnia l./s           | 2361,052 | 2308,077 | 52,975 |
 |                        |          |          |        |
 | Min                    | 3        | 3        | 9      |
@@ -123,7 +123,7 @@ Table: Statystyki Java w teście prostego zapytania
 \caption{Wykres czasu odpowiedzi na zapytania}
 \end{figure}
 
-83% zapytań zostało obsłużonych w czasie większym niż 1200 milisekund oraz 4% z całości oznaczono jako błędne.  
+83% zapytań zostało obsłużonych w czasie większym niż 1200 milisekund oraz 4% z całości oznaczono jako błędne.
 
 \begin{figure}[htbp]
 \centering
@@ -131,7 +131,7 @@ Table: Statystyki Java w teście prostego zapytania
 \caption{Wykres aktywnych użytkowników w czasie trwania testu}
 \end{figure}
 
-Liczba aktywnych użytkowników rośnie liniowo i po otrzymaniu ostatniego rządania również liniowo spada obsługując oczekujących użytkowników.
+Liczba aktywnych użytkowników rośnie liniowo i po otrzymaniu ostatniego żądania również liniowo spada obsługując oczekujących użytkowników.
 
 \begin{figure}[htbp]
 \centering
@@ -169,9 +169,9 @@ Percentyle czasu odpowiedzi oraz opóźnienia utrzymują się na zbliżonym pozi
 \caption{Wykres percentyli opóźnienia w czasie trwania testu}
 \end{figure}
 
-| W sumie                | OK       | KO       |        |
+|                        | W sumie  | OK       | KO     |
 |------------------------|----------|----------|--------|
-|                        | 350000   | 335176   | 14824  |
+| Zapytania              | 350000   | 335176   | 14824  |
 | Średnia l./s           | 1741,328 | 1667,575 | 73,753 |
 |                        |          |          |        |
 | Min                    | 1        | 1        | 8      |
@@ -195,7 +195,7 @@ Table: Statystyki JavaScript w teście prostego zapytania
 \caption{Wykres czasu odpowiedzi na zapytania}
 \end{figure}
 
-Spośród wszystkich zapytań na 93% otrzymano odpowiedzi w czasie mniejszym niż 800ms oraz brak błędów.  
+Spośród wszystkich zapytań na 93% otrzymano odpowiedzi w czasie mniejszym niż 800ms oraz brak błędów.
 
 \begin{figure}[htbp]
 \centering
@@ -203,7 +203,7 @@ Spośród wszystkich zapytań na 93% otrzymano odpowiedzi w czasie mniejszym ni�
 \caption{Wykres aktywnych użytkowników w czasie trwania testu}
 \end{figure}
 
-Liczba aktywnych użytkowników stabilizuje się po 25 sekundach od rozpoczęcia testu.  
+Liczba aktywnych użytkowników stabilizuje się po 25 sekundach od rozpoczęcia testu.
 
 \begin{figure}[htbp]
 \centering
@@ -217,7 +217,7 @@ Liczba aktywnych użytkowników stabilizuje się po 25 sekundach od rozpoczęcia
 \caption{Wykres liczby zapytań na sekundę w czasie testu}
 \end{figure}
 
-Zapytania przyjmowano na stałym poziomie po ustabilizowaniu.  
+Zapytania przyjmowano na stałym poziomie po ustabilizowaniu.
 
 \begin{figure}[htbp]
 \centering
@@ -225,7 +225,7 @@ Zapytania przyjmowano na stałym poziomie po ustabilizowaniu.
 \caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
 \end{figure}
 
-Wykres liczby odpowiedzi odpowiada wykresowi liczby zapytań, stała liczba odpowiedzi na sekundę i brak błędów.  
+Wykres liczby odpowiedzi odpowiada wykresowi liczby zapytań, stała liczba odpowiedzi na sekundę i brak błędów.
 
 \begin{figure}[htbp]
 \centering
@@ -243,9 +243,9 @@ Wykres liczby odpowiedzi odpowiada wykresowi liczby zapytań, stała liczba odpo
 
 Na \ref{elixir:simple:response_percentile} oraz \ref{elixir:simple:latency_percentile} wyraźnie widać czas stabilizacji aplikacji.
 
-| W sumie                | OK      | KO      |    |
+|                        | W sumie | OK      | KO |
 |------------------------|---------|---------|----|
-|                        | 350000  | 350000  | 0  |
+| Zapytania              | 350000  | 350000  | 0  |
 | Średnia l./s           | 3498.74 | 3498.74 | -  |
 |                        |         |         |    |
 | Min                    | 0       | 0       | -  |
@@ -263,9 +263,7 @@ Table: Statystyki Elixir w teście prostego zapytania
 
 ## Czasochłonne obliczenia
 
-TODO: opis kodu
-
-Współczesne systemy informatyczne wykonują wiele skomplikowanych operacji. Nie liczy się jedynie możliwość obsługi dużej liczby zapytań, ale także wykorzystanie mocy obliczeniowej sprzętu do wykonywania operacji. Celem tego testu jest sprawdzenie wydajności technologii przy jednoczesnym dostępnie wielu użytkowników jednocześnie testując wsparcie dla dużych liczb.  
+Współczesne systemy informatyczne wykonują wiele skomplikowanych operacji. Nie liczy się jedynie możliwość obsługi dużej liczby zapytań, ale także wykorzystanie mocy obliczeniowej sprzętu do wykonywania operacji. Celem tego testu jest sprawdzenie wydajności technologii przy jednoczesnym dostępnie wielu użytkowników jednocześnie testując wsparcie dla dużych liczb. 
 
 Test polega na wykonaniu metody HTTP GET na serwerze zwracającym 100000 element ciągu Fibonacciego. Zasymulowano 1000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
 
@@ -297,7 +295,7 @@ Test polega na wykonaniu metody HTTP GET na serwerze zwracającym 100000 element
 \caption{Wykres liczby zapytań na sekundę w czasie testu}
 \end{figure}
 
-Po upłynięciu 1/3 testu serwer przestał przyjmować zapytania. Wynika to z przyjętego modelu współbieżności. Każde nadchodzące zapytanie jest obsługiwane w nowym wątku lub jest reużywany wątek używany uprzednio. Przy takim natężeniu wymagających czasowo żądań, osiągnięto limit wykorzystywanych wątków, w związku z czym kolejne nadchodzące zapytania nie mogły zostać przetworzone.  
+Po upłynięciu 1/3 testu serwer przestał przyjmować zapytania. Wynika to z przyjętego modelu współbieżności. Każde nadchodzące zapytanie jest obsługiwane w nowym wątku lub jest reużywany wątek używany uprzednio. Przy takim natężeniu wymagających czasowo żądań, osiągnięto limit wykorzystywanych wątków, w związku z czym kolejne nadchodzące zapytania nie mogły zostać przetworzone.
 
 \begin{figure}[htbp]
 \centering
@@ -317,9 +315,9 @@ Po upłynięciu 1/3 testu serwer przestał przyjmować zapytania. Wynika to z pr
 \caption{Wykres percentyli opóźnienia w czasie trwania testu}
 \end{figure}
 
-| W sumie                | OK      | KO      |       |
+|                        | W sumie | OK      | KO    |
 |------------------------|---------|---------|-------|
-|                        | 1000    | 260     | 740   |
+| Zapytania              | 1000    | 260     | 740   |
 | Średnia l./s           | 6,253   | 1,626   | 4,627 |
 |                        |         |         |       |
 | Min                    | 5892    | 5892    | 60000 |
@@ -343,7 +341,7 @@ Table: Statystyki Java w teście z wykorzystaniem czasochłonnych obliczeń
 \caption{Wykres czasu odpowiedzi na zapytania}
 \end{figure}
 
-96% zapytań zostało oznaczonych jako błędnych ze względu na przekroczenie czasu żądania wynoszącego 60 sekund. JavaScript nie posiada wsparcia dla dużych liczb. Wykorzystana biblioteka bignum jest implementacją natywną. Ze względu na charakterystykę zadania, wykonywanie jest wiele operacji na dużych liczbach. Z tego powodu silnik V8 języka JavaScript jest zmuszony do wykonywania ciągłych odwołań do natywnego kodu, co znaczenie spowalnia pracę aplikacji.  
+96% zapytań zostało oznaczonych jako błędnych ze względu na przekroczenie czasu żądania wynoszącego 60 sekund. JavaScript nie posiada wsparcia dla dużych liczb. Wykorzystana biblioteka bignum jest implementacją natywną. Ze względu na charakterystykę zadania, wykonywanie jest wiele operacji na dużych liczbach. Z tego powodu silnik V8 języka JavaScript jest zmuszony do wykonywania ciągłych odwołań do natywnego kodu, co znaczenie spowalnia pracę aplikacji.
 
 \begin{figure}[htbp]
 \centering
@@ -381,9 +379,9 @@ Table: Statystyki Java w teście z wykorzystaniem czasochłonnych obliczeń
 \caption{Wykres percentyli opóźnienia w czasie trwania testu}
 \end{figure}
 
-| W sumie                | OK      | KO    |       |
+|                        | W sumie | OK    | KO    |
 |------------------------|---------|-------|-------|
-|                        | 1000    | 38    | 962   |
+| Zapytania              | 1000    | 38    | 962   |
 | Średnia l./s           | 5,249   | 0,199 | 5,05  |
 |                        |         |       |       |
 | Min                    | 1787    | 1787  | 60000 |
@@ -407,7 +405,7 @@ Table: Statystyki JavaScript w teście z wykorzystaniem czasochłonnych oblicze�
 \caption{Wykres czasu odpowiedzi na zapytania}
 \end{figure}
 
-1/3 zapytań została oznaczona jako błędne ze względu na przekroczenie maksymalnego czasu żądania wynoszącego 60 sekund. Poprawne odpowiedzi otrzymano w czasie powyżej 1200 milisekund. Jedynie nieznaczną część z nich otrzymano poniżej 1200 milisekund. 
+1/3 zapytań została oznaczona jako błędne ze względu na przekroczenie maksymalnego czasu żądania wynoszącego 60 sekund. Poprawne odpowiedzi otrzymano w czasie powyżej 1200 milisekund. Jedynie nieznaczną część z nich otrzymano poniżej 1200 milisekund.
 
 \begin{figure}[htbp]
 \centering
@@ -447,9 +445,9 @@ W połowie testu obciążony system ograniczył przyjmowanie nadchodzących zapy
 \caption{Wykres percentyli opóźnienia w czasie trwania testu}
 \end{figure}
 
-| W sumie                | OK       | KO     |        |
+|                        | W sumie  | OK     | KO     |
 |------------------------|----------|--------|--------|
-|                        | 1 000,00 | 747,00 | 253,00 |
+| Zapytania              | 1 000,00 | 747,00 | 253,00 |
 | Średnia l./s           | 6,26     | 4,68   | 1,585  |
 |                        |          |        |        |
 | Min                    | 484      | 484    | 60008  |
@@ -467,9 +465,7 @@ Table: Statystyki Elixir w teście z wykorzystaniem czasochłonnych obliczeń
 
 ## Operacje na zbiorach danych
 
-TODO: opis kodu
-
-Test \ref{czasochux142onne-obliczenia} ma za zadanie przetestować dużą liczbę wykonywanych operacji na każde zadanie. Celem tego testu jest porównanie każdej z wybranych technologii w kategorii możliwości manipulowania danymi.  
+Test \ref{czasochux142onne-obliczenia} ma za zadanie przetestować dużą liczbę wykonywanych operacji na każde zadanie. Celem tego testu jest porównanie każdej z wybranych technologii w kategorii możliwości manipulowania danymi.
 
 Test polega na wykonaniu metody HTTP POST, w ciele której umieszczono wygenerowaną macierz liczb całkowitych. Zadaniem serwera jest zwrócenie transponowanej macierzy w odpowiedzi. Zasymulowano 10000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
 
@@ -481,7 +477,7 @@ Test polega na wykonaniu metody HTTP POST, w ciele której umieszczono wygenerow
 \caption{Wykres czasu odpowiedzi na zapytania}
 \end{figure}
 
-Korzystając z implementacji w języku Java żadne z zapytań nie zwróciło błędu. Na 99% żądań odpowiedź otrzymano poniżej 800 milisekund, a jedynie 83 z nich przetworzono powyżej tej granicy.  
+Korzystając z implementacji w języku Java żadne z zapytań nie zwróciło błędu. Na 99% żądań odpowiedź otrzymano poniżej 800 milisekund, a jedynie 83 z nich przetworzono powyżej tej granicy.
 
 \begin{figure}[htbp]
 \centering
@@ -507,7 +503,7 @@ Korzystając z implementacji w języku Java żadne z zapytań nie zwróciło bł
 \caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
 \end{figure}
 
-Zauważono ubytek, a zaraz po nim skok liczby odpowiedzi na sekundę w początkowej fazie testu. Po początkowej inicjalizacji, każdy nowy użytkownik został obsłużony na bieżąco. 
+Zauważono ubytek, a zaraz po nim skok liczby odpowiedzi na sekundę w początkowej fazie testu. Po początkowej inicjalizacji, każdy nowy użytkownik został obsłużony na bieżąco.
 
 \begin{figure}[htbp]
 \centering
@@ -523,9 +519,9 @@ Zauważono ubytek, a zaraz po nim skok liczby odpowiedzi na sekundę w początko
 
 Wystąpiła mała różnica w czasach odpowiedzi i opóźnienia pomiędzy poszczególnymi zapytaniami w czasie trwania testu, zachowano równy poziom.
 
-| W sumie                | OK      | KO     |    |
+|                        | W sumie | OK     | KO |
 |------------------------|---------|--------|----|
-|                        | 10000   | 10000  | 0  |
+| Zapytania              | 10000   | 10000  | 0  |
 | Średnia l./s           | 99,785  | 99,785 | -  |
 |                        |         |        |    |
 | Min                    | 5       | 5      | -  |
@@ -591,11 +587,11 @@ Wszystkie żądania przyjęto niezwłocznie do obsługi, zaś wykres czasu odpow
 \label{js:matrix:latency_percentile}
 \end{figure}
 
-Na podstawie wykresów \ref{js:matrix:response_percentile} oraz \ref{js:matrix:latency_percentile} można zaobserwować wpływ optymalizacji przetwarzania zapytań przez silnik V8. Czasy odpowiedzi jak i opóźnienie wyraźnie spada w czasie trwania testu. 
+Na podstawie wykresów \ref{js:matrix:response_percentile} oraz \ref{js:matrix:latency_percentile} można zaobserwować wpływ optymalizacji przetwarzania zapytań przez silnik V8. Czasy odpowiedzi jak i opóźnienie wyraźnie spada w czasie trwania testu.
 
-| W sumie                | OK      | KO     |    |
+|                        | W sumie | OK     | KO |
 |------------------------|---------|--------|----|
-|                        | 10000   | 10000  | 0  |
+| Zapytania              | 10000   | 10000  | 0  |
 | Średnia l./s           | 99,743  | 99,743 | -  |
 |                        |         |        |    |
 | Min                    | 219     | 219    | -  |
@@ -639,7 +635,7 @@ Błędne zapytania stanowią 7% całego testu, pozostałe zaś zostały przetwor
 \caption{Wykres liczby zapytań na sekundę w czasie testu}
 \end{figure}
 
-Zapytania zostały przyjęte na stałym poziomie, jednak część zapytań, ze względu na obciążenie została odrzucona, a odpowiedzi na nie przekroczyły maksymalny czas żądania wynoszący 60 sekund.  
+Zapytania zostały przyjęte na stałym poziomie, jednak część zapytań, ze względu na obciążenie została odrzucona, a odpowiedzi na nie przekroczyły maksymalny czas żądania wynoszący 60 sekund.
 
 \begin{figure}[htbp]
 \centering
@@ -661,9 +657,9 @@ Zapytania zostały przyjęte na stałym poziomie, jednak część zapytań, ze w
 
 Pomimo utraty części zapytań w granicach 19:37:25 czas odpowiedzi oraz opóźnienie uległy poprawie.
 
-| W sumie                | OK      | KO     |       |
+|                        | W sumie | OK     | KO    |
 |------------------------|---------|--------|-------|
-|                        | 10000   | 9274   | 726   |
+| Zapytania              | 10000   | 9274   | 726   |
 | Średnia l./s           | 65,691  | 60,922 | 4,769 |
 |                        |         |        |       |
 | Min                    | 443     | 443    | 38129 |
@@ -681,11 +677,9 @@ Table: Statystyki Elixir w teście z wykorzystaniem zbiorów danych
 
 ## Ograniczenia wejścia/wyjścia
 
-TODO: opis kodu
+Większość systemów informatycznych korzysta z pewnego rodzaju urządzeń wejścia/wyjścia. Nie licząc urządzenia sieciowego, używanymi interfejsami mogą być system plików czy system zarządzania bazą danych. W tym teście wykorzystano system plików, gdyż jest obsługiwany przez standardową bibliotekę każdej w porównywanych technologii, w przeciwieństwie do komunikacji z bazą danych. 
 
-Większość systemów informatycznych korzysta z pewnego rodzaju urządzeń wejścia/wyjścia. Nie licząc urządzenia sieciowego, używanymi interfejsami mogą być system plików czy system zarządzania bazą danych. W tym teście wykorzystano system plików, gdyż jest obsługiwany przez standardową bibliotekę każdej w porównywanych technologii, w przeciwieństwie do komunikacji z bazą danych.  
-
-Test polega na wykonaniu metody HTTP GET na serwerze zwracającym plik tekstowy ze znakami ASCI o rozmiarze 1MB. element ciągu Fibonacciego. Zasymulowano 12000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
+Test polega na wykonaniu metody HTTP GET na serwerze zwracającym plik tekstowy ze znakami ASCI o rozmiarze 1MB. Zasymulowano 12000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
 
 ### Java
 
@@ -695,7 +689,7 @@ Test polega na wykonaniu metody HTTP GET na serwerze zwracającym plik tekstowy 
 \caption{Wykres czasu odpowiedzi na zapytania}
 \end{figure}
 
-Nie utracono żadnego żądania i żadna odpowiedź nie została oznaczona jako błędna, lecz 100% z nich otrzymano w czasie większym niż 1200 milisekund.  
+Nie utracono żadnego żądania i żadna odpowiedź nie została oznaczona jako błędna, lecz 100% z nich otrzymano w czasie większym niż 1200 milisekund.
 
 \begin{figure}[htbp]
 \centering
@@ -737,11 +731,11 @@ Serwer utrzymał stały poziom obsługi przychodzących połączeń oraz odpowie
 \caption{Wykres percentyli opóźnienia w czasie trwania testu}
 \end{figure}
 
-Czas odpowiedzi oraz opóźnienie pokrywają się z liczbą aktywnych użytkowników. Wraz z wzrostem liczby oczekujących zapytań wzrasta czas odpowiedzi oraz opóźnienie. Wystąpiło nieznaczne rozwarstwienie w czasach odpowiedzi w danej chwili czasu testu.  
+Czas odpowiedzi oraz opóźnienie pokrywają się z liczbą aktywnych użytkowników. Wraz z wzrostem liczby oczekujących zapytań wzrasta czas odpowiedzi oraz opóźnienie. Wystąpiło nieznaczne rozwarstwienie w czasach odpowiedzi w danej chwili czasu testu.
 
-| W sumie                | OK      | KO      |    |
+|                        | W sumie | OK      | KO |
 |------------------------|---------|---------|----|
-|                        | 12000   | 12000   | 0  |
+| Zapytania              | 12000   | 12000   | 0  |
 | Średnia l./s           | 115,657 | 115,657 | -  |
 |                        |         |         |    |
 | Min                    | 1067    | 1067    | -  |
@@ -807,11 +801,11 @@ Zarówno liczba zapytań jak i odpowiedzi utrzymano na stałym poziomie.
 \caption{Wykres percentyli opóźnienia w czasie trwania testu}
 \end{figure}
 
-Czas odpowiedzi oraz opóźnienie rosną wraz z wzrastającą liczbą aktywnych użytkowników, oczekujących na odpowiedź. Opóźnienia oraz czasy odpowiedzi w danej chwili czasu są niejednorodne, rozwarstwienie rośnie w miarę przybywania aktywnych użytkowników. 
+Czas odpowiedzi oraz opóźnienie rosną wraz z wzrastającą liczbą aktywnych użytkowników, oczekujących na odpowiedź. Opóźnienia oraz czasy odpowiedzi w danej chwili czasu są niejednorodne, rozwarstwienie rośnie w miarę przybywania aktywnych użytkowników.
 
-| W sumie                | OK      | KO      |    |
+|                        | W sumie | OK      | KO |
 |------------------------|---------|---------|----|
-|                        | 12000   | 12000   | 0  |
+| Zapytania              | 12000   | 12000   | 0  |
 | Średnia l./s           | 114,718 | 114,718 | -  |
 |                        |         |         |    |
 | Min                    | 248     | 248     | -  |
@@ -877,11 +871,11 @@ Utrzymano stały poziom poziom obsługi połączeń przychodzących oraz przetwa
 \caption{Wykres percentyli opóźnienia w czasie trwania testu}
 \end{figure}
 
-Czas odpowiedzi oraz opóźnienie rosną wraz z wzrastającą liczbą aktywnych użytkowników, oczekujących na odpowiedź. Opóźnienia oraz czasy odpowiedzi w danej chwili czasu są niejednorodne, rozwarstwienie rośnie w miarę przybywania aktywnych użytkowników.  
+Czas odpowiedzi oraz opóźnienie rosną wraz z wzrastającą liczbą aktywnych użytkowników, oczekujących na odpowiedź. Opóźnienia oraz czasy odpowiedzi w danej chwili czasu są niejednorodne, rozwarstwienie rośnie w miarę przybywania aktywnych użytkowników.
 
-| W sumie                | OK      | KO      |    |
+|                        | W sumie | OK      | KO |
 |------------------------|---------|---------|----|
-|                        | 12000   | 12000   | 0  |
+| Zapytania              | 12000   | 12000   | 0  |
 | Średnia l./s           | 116,457 | 116,457 | -  |
 |                        |         |         |    |
 | Min                    | 639     | 639     | -  |
@@ -897,7 +891,7 @@ Table: Statystyki Elixir w teście z ograniczeniami wejścia/wyjścia
 
 \clearpage
 
-## Wnioski
+## Podsumowanie
 
 \begin{figure}[!ht]
 \centering
@@ -927,12 +921,13 @@ Jednakże znaczący wpływ w tym przypadku wywarła optymalizacja w czasie wykon
 \caption{Wykres średniej liczby zapytań dla wyliczenia liczby ciągu Fibonacciego}
 \end{figure}
 
-W grupie czasochłonnych obliczeń dla przypadku obliczania liczby Fibonacciego Elixir osiągnął najlepszy wynik pod względem średniej liczby zapytań na sekundę oraz odsetka błędnych odpowiedzi. 
+Pomimo zbliżonej średniej liczbie zapytań na sekundę pomiędzy Javą i Elixirem w grupie czasochłonnych obliczeń dla przypadku obliczania liczby Fibonacciego Elixir osiągnął najlepszy wynik pod względem średniej liczby zapytań na sekundę oraz odsetka błędnych odpowiedzi. Procent poprawnie przetworzonych zapytań Javy i JavaScriptu, odpowiednio 26% i 4%, jest nieporównywalny z Elixirem przy 75%.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/fib_percentage.png}
 \caption{Wykres poprawnej wymiany zapytań i odpowiedzi dla wyliczenia liczby ciągu Fibonacciego}
+\label{summary:fib:response}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -941,11 +936,15 @@ W grupie czasochłonnych obliczeń dla przypadku obliczania liczby Fibonacciego 
 \caption{Wykres czasu odpowiedzi dla wyliczenia liczby ciągu Fibonacciego}
 \end{figure}
 
+Czasy odpowiedzi dla każdej z trzech testowanych technologii plasują się na podobnym poziomie, z różnicami jedynie w minimalnych czasach odpowiedzi. Jednakże rysunek \ref{summary:fib:response} przedstawia wyniki jedynie dla odpowiedzi poprawnych. W przypadku technologii Java i JavaScript wyniki mogą stanowić źródło nieprawdy, gdyż mała cześć całości żądań testu została przetworzona poprawnie.
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/matrix_avg.png}
 \caption{Wykres średniej liczby zapytań dla transpozycji macierzy}
 \end{figure}
+
+W przypadku transpozycji macierzy Java oraz JavaScript uzyskały niemalże wyniki. Rozwiązania z wykorzystaniem obu technologii obsłużyły poprawnie wszystkie zapytania z wynikiem około 100 zapytań na sekundę. 
 
 \begin{figure}[!ht]
 \centering
@@ -959,18 +958,22 @@ W grupie czasochłonnych obliczeń dla przypadku obliczania liczby Fibonacciego 
 \caption{Wykres czasu odpowiedzi dla transpozycji macierzy}
 \end{figure}
 
+W kategorii czasu odpowiedzi Java wypadła lepiej od JavaScript ze średnim czasem 162 milisekund przeciwko 644 milisekundom. Jednakże dla tego testu wyniki Elixira są znaczenie gorsze od dwóch pozostałych technologii osiągając średni czas odpowiedzi równy 22038 milisekund oraz tracąc 7% zapytań. Tak znaczące pogorszenie w stosunku do poprzednich testów wynika z przyjętego modelu obliczeń. Model aktorowy, który uprzednio stanowił atut jest przyczyną dużych czasów odpowiedzi. Z powodu tego, że lekkie procesy w wirtualnej maszynie Erlanga nie współdzielą stanu, wszystkie dane pomiędzy nimi są kopiowane powodując znaczne opóźnienia. Dodatkowo, proces transpozycji macierzy, polegający na przekształceniach struktur, wymaga wykonywania kolejnych kopii danych. Wynika to z faktu, że Elixir jest funkcyjnym językiem programowania, w którym z założenia wszelkie struktury danych są niezmienne.  
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/file_avg.png}
 \caption{Wykres średniej liczby zapytań dla odczytu pliku}
 \end{figure}
 
-W przypadku odczytu pliku wszystkie zapytania i odpowiedzi zostały obsłużone w 100 procenatach.
+W przypadku odczytu pliku wszystkie zapytania i odpowiedzi zostały obsłużone w 100 procentach.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/file_response.png}
 \caption{Wykres czasu odpowiedzi dla odczytu pliku}
 \end{figure}
+
+Java uzyskała bardzo stabilne wyniki, wydajnościowo test nie stanowił problemu, lecz ze względu na to, że dostęp do plików w Javie jest w znacznej części blokujący, obsługa wielu zapytań czekała na urządzenie wejścia/wyjścia. Najniższy czas odpowiedzi, 248 milisekund, osiągnął JavaScript, a tuż za nim, z wynikiem 639 milisekund Elixir. Ze względu na to Node.js jest dobrze uwarunkowany do zadań wymagających nieznacznej mocy obliczeniowej oraz bardzo szybkiego dostępu do dysku i czasu odpowiedzi. Przykładem zastosowania tych atutów są między innymi serwery udostępniające dane strumieniowo.
 
 \clearpage

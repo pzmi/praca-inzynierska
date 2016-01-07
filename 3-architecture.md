@@ -31,13 +31,13 @@ Representational State Transfer nazywany w skrócie REST
 
 ## Java
 
-TODO: rozszerzyć: krótko o standardach i ustandaryzowanych technologiach, pozytywny wpływ tego na pracę (pełna paczka), ale zwykle wykorzystujemy ze 3, a jest ich ponad 30
+TODO: rozszerzyć: krótko o standardach i ustandaryzowanych technologiach, pozytywny wpływ tego na pracę (pełna paczka), ale zwykle wykorzystujemy ze 3, a jest ich ponad 30.
 
 Architektura złożonych systemów pisanych w Javie jest silnie związana z Javą Enterprise Edition, gdyż definiuje ona szereg standardów dla tworzenia logiki aplikacyjnej. Proces, w którym definiowane są owe standardy, jest przeprowadzany w ramach Java Community Process. Członkami komitetu, jak również osobami zabierającymi głos przy tworzeniu propozycji, jest społeczność użytkowników Javy i specjaliści w tej dziedzinie. Wielu z nich to przedstawiciele przedsiębiorstw aktywnie wykorzystujących te technologie, np. Credit Suisse, Ericsson, Fujitsu, IBM czy Intel\autocite{jcp2015}. Poprzez wkład tych i wielu innych firm Java Enterprise Edition jest powszechnie wykorzystywana między innymi w branży finansowej czy IT do tworzenia oprogramowania biznesowego. 
 
 ### Architektura wielowarstwowa
 
-TODO: trochę rozszerzyć: monolit, SOA
+TODO: trochę rozszerzyć: monolit, SOA, jeden jvm - wiele aplikacji - przeszkadzają sobie nawzajem
 
 Java EE definiuje architekturę tworzonych usług jako wielowarstwową aplikację, mającą zapewnić skalowalność, dostępność oraz łatwość zarządzania niezbędną dla systemów biznesowych. Przyjmując takie założenia autorzy Javy EE podzielili logikę aplikacji na komponenty w zależności od ich funkcji. Dzięki temu podziałowi możliwe jest rozdystrybuowanie systemu poprzez umieszczenie każdej z warstw na osobnej maszynie.  
 Przewidziano następujące komponenty:

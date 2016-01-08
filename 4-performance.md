@@ -1,7 +1,5 @@
 # Wydajność
 
-TODO: kod
-
 Wydajność technologii można mierzyć pod wieloma różnymi aspektami, a na otrzymane wyniki wpływa duża liczba czynników. Przedstawiane środowiska programistyczne zostały przetestowane pod kontem wydajności w kilku odmiennych scenariuszach.
 
 Wybrano 4 przypadki w 3 kategoriach:
@@ -39,6 +37,8 @@ Komputery podłączono bezpośrednio w sieć o przepustowości 1Gb/s.
 W dobie Internetu znaczna cześć aplikacji wykorzystywanych na co dzień korzysta z łączności sieciowej. W ostatnich latach obserwuje się znaczny wzrost na rynku usług zdalnych, a także zwiększenie liczby użytkowników owych usług. Z tego względu współczesne systemy informatyczne muszą być w stanie obsłużyć znaczne liczby jednoczesnych połączeń i zapytań.
 
 Test polega na wykonaniu metody HTTP GET na serwerze zwracającym prosty łańcuch tekstowy. Zasymulowano 350000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
+
+Implementacje we wszystkich trzech technologiach są trywialne, polegające na prostym umieszczeniu w odpowiedzi łańcucha znaków, więc zostały pominięte.
 
 ### Java
 
@@ -269,6 +269,33 @@ Test polega na wykonaniu metody HTTP GET na serwerze zwracającym 100000 element
 
 ### Java
 
+~~~~{.Java .numberLines caption="Java - obliczanie n-tego elementu ciągu Fibonacciego"}
+import java.math.BigDecimal;
+
+public class Fibonacci {
+    public static BigDecimal calculateNth(long n) {
+        BigDecimal result = new BigDecimal(n);
+        if (n < 2) {
+            return result;
+        }
+
+        BigDecimal n1 = new BigDecimal(0);
+        BigDecimal n2 = new BigDecimal(1);
+        n--;
+        while (n > 0) {
+            result = n1.add(n2);
+            n1 = n2;
+            n2 = result;
+            n--;
+        }
+
+        return result;
+    }
+}
+~~~~
+
+W implementacji zastosowano iteracyjny algorytm wyznaczania n-tego elementu ciągu Fibonacciego, ze względu na możliwość wystąpienia przepełnienia stosu przy wykorzystaniu wersji rekurencyjnej. Do przechowywania dużych wartości całkowitych wykorzystano standardową klasę BigDecimal.
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/fibonacci/screenshots/response_times.png}
@@ -335,6 +362,31 @@ Table: Statystyki Java w teście z wykorzystaniem czasochłonnych obliczeń
 
 ### JavaScript
 
+~~~~{.JavaScript .numberLines caption="JavaScript - obliczanie n-tego elementu ciągu Fibonacciego"}
+var BigNum = require('bignum');
+
+function calculateNth(n) {
+    var result = BigNum(n);
+    if (n < 2) {
+        return result;
+    }
+
+    var n1 = BigNum(0);
+    var n2 = BigNum(1);
+    n -= 1;
+    while (n > 0) {
+        result = n1.add(n2);
+        n1 = n2;
+        n2 = result;
+        n -= 1;
+    }
+
+    return result;
+}
+~~~~
+
+Powyższa implementacja jest translacją wersji w języku Java. Do przechowywania dużych wartości całkowitych wykorzystano bibliotekę bignum.
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/fibonacci/screenshots/response_times.png}
@@ -398,6 +450,22 @@ Table: Statystyki JavaScript w teście z wykorzystaniem czasochłonnych oblicze�
 \clearpage
 
 ### Elixir
+
+~~~~{.Elixir .numberLines caption="Elixir - obliczanie n-tego elementu ciągu Fibonacciego"}
+defmodule Test.Calculation.Fibonacci do
+    def calculate_nth(0), do: 0
+    def calculate_nth(1), do: 1
+    def calculate_nth(n), do: fib(0, 1, n-2)
+ 
+    defp fib(_, prv, -1), do: prv
+    defp fib(prvprv, prv, n) do
+        next = prv + prvprv
+        fib(prv, next, n-1)
+    end
+end
+~~~~
+
+W języku Elixir, z racji jego funkcyjnego charakteru, nie istnieje pojęcie pętli. Z tego względu implementacja algorytmu wykorzystuje rekurencję. Użyto *rekurencji ogonowej* (*rekurencji prawostronnej*, ang. *tail call*), która umożliwia automatyczną optymalizację do wersji iteracyjnej, co zwiększa wydajność i eliminuje zagrożenie przepełnienia stosu.
 
 \begin{figure}[htbp]
 \centering
@@ -471,6 +539,26 @@ Test polega na wykonaniu metody HTTP POST, w ciele której umieszczono wygenerow
 
 ### Java
 
+~~~~{.Java .numberLines caption="Java - transpozycja macierzy"}
+public class Matrix {
+    public static int[][] transpose(int [][] matrix) {
+        int xDimension = matrix.length;
+        int yDimension = matrix[0].length;
+
+        int[][] result = new int[yDimension][xDimension];
+        for (int row = 0; row < xDimension; row++) {
+            for (int col = 0; col < yDimension; col++) {
+                result[col][row] = matrix[row][col];
+            }
+        }
+
+        return result;
+    }
+}
+~~~~
+
+Powyższy kod pobiera wymiary $x, y$ przekazanej macierzy $a$, aby utworzyć nową macierz $b$ o wymiarach $y, x$. Następnie, wiersz po wierszu i element o elemencie wiersza, wartości macierzy $a$ są przepisywane do macierzy $b$, tak że $a_{xy} = b_{yx}$
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/matrix/screenshots/response_times.png}
@@ -538,6 +626,26 @@ Table: Statystyki Java w teście z wykorzystaniem zbiorów danych
 \clearpage
 
 ### JavaScript
+
+~~~~{.JavaScript .numberLines caption="JavaScript - transpozycja macierzy"}
+function transpose(matrix) {
+    var xDimension = matrix.length;
+    var yDimension = matrix[0].length;
+
+    var result = [];
+    for (var row = 0; row < xDimension; row++) {
+        var new_row = [];
+        for (var col = 0; col < yDimension; col++) {
+            new_row.push(matrix[col][row]);
+        }
+        result.push(new_row);
+    }
+
+    return result;
+}
+~~~~
+
+Implementacja ta jest translacją z języka Java, jednak każdy z wierszy jest tworzony i uzupełniany niezależnie, a następnie dołączany na koniec macierzy wynikowej.
 
 \begin{figure}[htbp]
 \centering
@@ -608,6 +716,18 @@ Table: Statystyki JavaScript w teście z wykorzystaniem zbiorów danych
 \clearpage
 
 ### Elixir
+
+~~~~{.Elixir .numberLines caption="Elixir - transpozycja macierzy"}
+defmodule Test.Calculation.Matrix do
+    def transpose(matrix) do
+        matrix |>
+        List.zip |>
+        Enum.map(&Tuple.to_list(&1))
+    end
+end
+~~~~
+
+Transpozycja macierzy w języku Elixir korzysta z jego funkcyjnych możliwości. Dzięki użyciu funkcji dostępnych w standardowej bibliotece kod jest bardziej zwięzły od pozostałych implementacji. Funkcja *List.zip* łączy w krotki elementy z każdego wiersza macierzy o tej samej pozycji. Następnie, używając funkcji *Enum.map*, na każdej z utworzonych krotek wykonywana jest funkcja *Tuple.to_list*, w celu przekształcenia ich do jednorodnej macierzy.
 
 \begin{figure}[htbp]
 \centering
@@ -680,6 +800,8 @@ Table: Statystyki Elixir w teście z wykorzystaniem zbiorów danych
 Większość systemów informatycznych korzysta z pewnego rodzaju urządzeń wejścia/wyjścia. Nie licząc urządzenia sieciowego, używanymi interfejsami mogą być system plików czy system zarządzania bazą danych. W tym teście wykorzystano system plików, gdyż jest obsługiwany przez standardową bibliotekę każdej w porównywanych technologii, w przeciwieństwie do komunikacji z bazą danych. 
 
 Test polega na wykonaniu metody HTTP GET na serwerze zwracającym plik tekstowy ze znakami ASCI o rozmiarze 1MB. Zasymulowano 12000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
+
+Implementacje we wszystkich trzech technologiach są trywialne, korzystają ze standardowej biblioteki do umieszczenia pliku w ciele odpowiedzi, więc zostały pominięte.
 
 ### Java
 

@@ -124,20 +124,26 @@ Równie ważnym elementem OTP jest protokół komunikacji rozproszonej Erlanga. 
 
 ### Model aktorowy
  
-TODO: trochę rozszerzyć
+Model aktorowy jest modelem programowania, w którym przetwarzanie jest wykonywane z natury współbieżnie. Podstawową jednostką wykonawczą tego modelu jest *aktor*.
 
-- czym są aktorzy 
-- podstawowe założenia
-- rozwiązywane problemy
+Aktor jest jednostką wykonawczą, która odwzorowuje każdą przychodzącą wiadomość na krotkę składającą się z:
 
-Aktorzy \autocite{hewitt1977laws, agha86actors} są modelem programowania współbieżnego. Są to obiekty o współbieżnym przetwarzaniu porozumiewające się wyłącznie asynchronicznymi wiadomościami. Każdy z aktorów przechowuje otrzymane wiadomości w skrzynce odbiorczej i przetwarza je sekwencyjnie, po jednej w danym czasie. 
-Po przeprocesowaniu wiadomości aktor może zmienić swój stan, wysłać wiadomość lub stworzyć kolejnego aktora.  
+ - skończonego zbioru komunikatów przesłanych do innego aktora
+ - nowego zachowania, które wpłynie na odpowiedź następnego przetwarzanego komunikatu
+ - skończonego zbioru nowo utworzonych aktorów
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=130]{graphics/actor-messages.png}
 \caption{Akcje w modelu aktorowym \autocite{karmani2009actor}}
 \end{figure}
+
+Aktorzy, w odróżnieniu od modelu współdzielonych zmiennych, nie dzielą między sobą wspólnych obszarów pamięci. Informacje w obliczeniach aktorów mogą być przekazywane, tylko i wyłącznie, poprzez wiadomości. W odróżnieniu od modelu współbieżności wykorzystującego współdzielone obszary pamięci, aktorzy nie współdzielą 
+
+Aktorzy \autocite{hewitt1977laws, agha86actors} są modelem programowania współbieżnego. Są to obiekty o współbieżnym przetwarzaniu porozumiewające się wyłącznie asynchronicznymi wiadomościami. Każdy z aktorów przechowuje otrzymane wiadomości w skrzynce odbiorczej i przetwarza je sekwencyjnie, po jednej w danym czasie. 
+Po przeprocesowaniu wiadomości aktor może zmienić swój stan, wysłać wiadomość lub stworzyć kolejnego aktora.  
+
+
 
 Taki model przetwarzania pozwala uniknąć zablokowania przez czekającą wiadomość, co pozwala na łatwiejsze unikanie zakleszczeń w systemie.
 Obsługa każdej z wiadomości jest operacją atomową.  
@@ -147,8 +153,8 @@ Inną cechą aktorów jest przezroczystość położenia. Poszczególne jednostk
 
 ## Dyskusja
 
-Java Enterprise Edition zaczynała z nie więcej niż 10 standardami. Przez wiele lat rozwoju i aktualizacji liczba ta zwiększyła się aż do 34 w wersji 7. Serwery aplikacyjne, które są podstawowym składnikiem budulcowym aplikacji napisanych wykorzystujących Javę EE, dążą do pełnej implementacji standardowej specyfikacji oraz wzbogacają ją o własne rozwiązania. Niewiele z tych technologii wprowadza korzystne dla architektury mikroserwisowej rozwiązania. Standard Java EE nigdy nie był projektowany z myślą o systemach rozproszonych poza wydzieleniem warstwy bazodanowej i klienckiej. W związku z powyższym, na starcie utrzymujemy w systemie dużą bazę kodu, który nie zostanie wykorzystany. Wykorzystanie serwerów aplikacyjnych zakłada wdrażanie na jednym z nich wielu usług jednocześnie. Biorąc po uwagę fakt, że taki serwer pracuje pod jednym procesem wirtualnej maszyny Javy, aplikacje działające pod jego nadzorem mogą zakłócać działanie sobie na wzajem, a w najgorszym przypadku jedna z nich może doprowadzić do awarii wszystkich poprzez przerwanie działania samego serwera.  
+Java Enterprise Edition zaczynała z nie więcej niż 10 standardami. Przez wiele lat rozwoju i aktualizacji liczba ta zwiększyła się aż do 34 w wersji 7. Serwery aplikacyjne, które są podstawowym składnikiem budulcowym aplikacji napisanych wykorzystujących Javę EE, dążą do pełnej implementacji standardowej specyfikacji oraz wzbogacają ją o własne rozwiązania. Niewiele z tych technologii wprowadza korzystne dla architektury mikroserwisowej rozwiązania. Standard Java EE nigdy nie był projektowany z myślą o systemach rozproszonych poza wydzieleniem warstwy bazodanowej i klienckiej. W związku z powyższym, na starcie utrzymujemy w systemie dużą bazę kodu, który nie zostanie wykorzystany. Wykorzystanie serwerów aplikacyjnych zakłada wdrażanie na jednym z nich wielu usług jednocześnie. Biorąc po uwagę fakt, że taki serwer pracuje pod jednym procesem wirtualnej maszyny Javy, aplikacje działające pod jego nadzorem mogą zakłócać działanie sobie na wzajem, a w najgorszym przypadku jedna z nich może doprowadzić do awarii wszystkich poprzez przerwanie działania samego serwera.
 
 Tworzenie aplikacji monolitycznych jest możliwe przy wykorzystaniu Node.js, lecz zastosowanie jednowątkowego wzorca Rektor nie sprzyja takiemu podejściu. Z tego względu lepszym rozwiązaniem wydaje się wydzielenie poszczególnych funkcjonalności na osobne programy, dzięki czemu mogą wykorzystać zasoby systemów wieloprocesorowych bez wzajemnej ingerencji w działanie. Z tego powodu, pomimo braku standardowych rozwiązań, zastosowanie architektury mikroserwisowej jest popularnym wyborem w środowisku JavaScript i wokół tego modelu rozwijanych jest szereg narzędzi i bibliotek.
 
-elixir - podobnie jak js wciąż niewytarte szlaki. model aktorowy, szczególnie w wydaniu distributred elixir, umożliwia komunikację pomiędzy serwisami w sposób transparentny dla programisty. model dojrzały ze względu na erlanga, lecz wciąż rozwijany, za równo z poziomu erlanga jak i elixira. Phoenix deployment ready - głównie pakuje w jedno dojrzałe technologie, wprowadzając ułątwienia dla programistów.
+Podobnie ja w przypadku języka JavaScript, w Elixirze nie istnieją standardowe wzorce architektoniczne systemów informatycznych. OTP sugeruje jedynie kształt podstawowych elementów budulcowych aplikacji, nie narzucając projektu. Monolityczny projekt stworzony w Elixirze można podzielić na mniejsze usługi wydzielając niezależne grupy procesów (aktorów) jako działające niezależne programy. Do komunikacji między procesami w architekturze mikroserwisowej popularnym wyborem jest HTTP. Jednakże przy użyciu Elixira, usługi mogą porozumiewać się przy pomocy protokołu rozproszonej komunikacji wirtualnej maszyny Erlanga. Jest to także ułatwienie dla programistów, gdyż wykorzystanie jego jest transparentne z punktu widzenia użytkownika.(patrz \ref{skalowalnoux15bux107}) To i inne standardowe narzędzia OTP są dojrzałe i stabilne ze względu na pochodzenie ze środowiska Erlanga oraz są wciąż aktywnie rozwijane, również przez społeczność Elixira. \autocite{valim2015microservices}

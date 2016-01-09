@@ -24,20 +24,11 @@ Nie tylko technologia programowania jest niezależna od architektury, to samo ty
 Taki podział systemu wymaga mechanizmów zewnętrznej komunikacji pomiędzy usługami, których koszt jest dużo wyższy od wywołań wewnątrz aplikacji. W związku z tym funkcjonalności i odpowiedzialności muszą być odpowiednio zaprojektowane i wydzielone, aby zminimalizować konieczność komunikacji pomiędzy komponentami, co wiąże się z dodatkowymi nakładami na projektowanie.
 Również metody komunikacji odgrywają duże znaczenie. W przeszłości do komunikacji rozproszonych systemów wykorzystywana różne technologie i podejście. Dobrym przykładem jest Korporacyjna Szyna Usług (ang. *Enterprise Service Bus*), która skupia wiele skomplikowanych mechanizmów zarządzania usługami, trasowania wiadomości i transformacji danych. Społeczność wspierająca mikroserwisy proponuje wykorzystywanie prostych, lekkich rozwiązań komunikacyjnych. W tym celu często jest stosowany protokół HTTP w zastosowaniu interfejsów REST. \autocite{fowler2014microservice, fowler2015microservices, newman2015building}
 
-### Representational State Transfer
-
-TODO: opis REST
-Representational State Transfer nazywany w skrócie REST
-
 ## Java
-
-TODO: rozszerzyć: krótko o standardach i ustandaryzowanych technologiach, pozytywny wpływ tego na pracę (pełna paczka), ale zwykle wykorzystujemy ze 3, a jest ich ponad 30.
 
 Architektura złożonych systemów pisanych w Javie jest silnie związana z Javą Enterprise Edition, gdyż definiuje ona szereg standardów dla tworzenia logiki aplikacyjnej. Proces, w którym definiowane są owe standardy, jest przeprowadzany w ramach Java Community Process. Członkami komitetu, jak również osobami zabierającymi głos przy tworzeniu propozycji, jest społeczność użytkowników Javy i specjaliści w tej dziedzinie. Wielu z nich to przedstawiciele przedsiębiorstw aktywnie wykorzystujących te technologie, np. Credit Suisse, Ericsson, Fujitsu, IBM czy Intel\autocite{jcp2015}. Poprzez wkład tych i wielu innych firm Java Enterprise Edition jest powszechnie wykorzystywana między innymi w branży finansowej czy IT do tworzenia oprogramowania biznesowego. 
 
 ### Architektura wielowarstwowa
-
-TODO: trochę rozszerzyć: monolit, SOA, jeden jvm - wiele aplikacji - przeszkadzają sobie nawzajem
 
 Java EE definiuje architekturę tworzonych usług jako wielowarstwową aplikację, mającą zapewnić skalowalność, dostępność oraz łatwość zarządzania niezbędną dla systemów biznesowych. Przyjmując takie założenia autorzy Javy EE podzielili logikę aplikacji na komponenty w zależności od ich funkcji. Dzięki temu podziałowi możliwe jest rozdystrybuowanie systemu poprzez umieszczenie każdej z warstw na osobnej maszynie.  
 Przewidziano następujące komponenty:
@@ -154,3 +145,10 @@ Aktorzy są od siebie odizolowani, nie dzielą między sobą zasobów i stanu. T
 Inną cechą aktorów jest przezroczystość położenia. Poszczególne jednostki rozpoznają się używając unikalnych adresów. Bez konieczności znajomości lokalizacji odbiorcy aktorzy mogą być rozdystrybuowani w system rozproszony. W związku z tym systemy oparte o model aktorowy skalują się na wiele różnych maszyn.
 
 
+## Dyskusja
+
+Java Enterprise Edition zaczynała z nie więcej niż 10 standardami. Przez wiele lat rozwoju i aktualizacji liczba ta zwiększyła się aż do 34 w wersji 7. Serwery aplikacyjne, które są podstawowym składnikiem budulcowym aplikacji napisanych wykorzystujących Javę EE, dążą do pełnej implementacji standardowej specyfikacji oraz wzbogacają ją o własne rozwiązania. Niewiele z tych technologii wprowadza korzystne dla architektury mikroserwisowej rozwiązania. Standard Java EE nigdy nie był projektowany z myślą o systemach rozproszonych poza wydzieleniem warstwy bazodanowej i klienckiej. W związku z powyższym, na starcie utrzymujemy w systemie dużą bazę kodu, który nie zostanie wykorzystany. Wykorzystanie serwerów aplikacyjnych zakłada wdrażanie na jednym z nich wielu usług jednocześnie. Biorąc po uwagę fakt, że taki serwer pracuje pod jednym procesem wirtualnej maszyny Javy, aplikacje działające pod jego nadzorem mogą zakłócać działanie sobie na wzajem, a w najgorszym przypadku jedna z nich może doprowadzić do awarii wszystkich poprzez przerwanie działania samego serwera.  
+
+Tworzenie aplikacji monolitycznych jest możliwe przy wykorzystaniu Node.js, lecz zastosowanie jednowątkowego wzorca Rektor nie sprzyja takiemu podejściu. Z tego względu lepszym rozwiązaniem wydaje się wydzielenie poszczególnych funkcjonalności na osobne programy, dzięki czemu mogą wykorzystać zasoby systemów wieloprocesorowych bez wzajemnej ingerencji w działanie. Z tego powodu, pomimo braku standardowych rozwiązań, zastosowanie architektury mikroserwisowej jest popularnym wyborem w środowisku JavaScript i wokół tego modelu rozwijanych jest szereg narzędzi i bibliotek.
+
+elixir - podobnie jak js wciąż niewytarte szlaki. model aktorowy, szczególnie w wydaniu distributred elixir, umożliwia komunikację pomiędzy serwisami w sposób transparentny dla programisty. model dojrzały ze względu na erlanga, lecz wciąż rozwijany, za równo z poziomu erlanga jak i elixira. Phoenix deployment ready - głównie pakuje w jedno dojrzałe technologie, wprowadzając ułątwienia dla programistów.

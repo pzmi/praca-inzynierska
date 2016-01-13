@@ -4,8 +4,14 @@ TODO: Ilość linii kodu i linii konfiguracji. Środowisko programisty, dostępn
 
 ## Java
 
+mvnrepository, jcp, apache, eclipse
+
 ## JavaScript
 
+npm
+
 ## Elixir
+
+hex
 
 ## Wnioski

@@ -31,7 +31,18 @@ Maszyna testująca:
 Na maszynę testującą celowo wybrano komputer o większej mocy, aby zapewnić ciągłość testów i uniknąć komplikacji wynikających z niewystarczającej mocy do analizy danych.  
 Komputery podłączono bezpośrednio w sieć o przepustowości 1Gb/s.
 
-Oprogramowanie wybrane do implementacji oraz przeprowadzenia testów wybrano na podstawie powszechności wykorzystania co określono przy wykorzystaniu statystyk dostępnych w publicznych repozytoriach \autocite{mavenrepo2015, npm2015, hex2015}. Rozwiązanie w języku Java oparto o serwer aplikacyjny WildFly będący, otwartą dla społeczności, dystrybucją serwera JBoss Enterprise Application Platform firmy RedHat. Wspiera on najnowszą dostępną wersję standardu Java EE 7. Dla implementacji w JavaScript i Node.js wykorzystano bibliotekę Express.js zapewniającą podstawowe mechanizmy wymagane do stworzenia aplikacji internetowej przy zapewnieniu stabilności dla rozwiązań produkcyjnych. Rozwiązanie w języku Elixir korzysta z pakietu Phoenix Framework, skupiającego dojrzałe technologie, przeznaczone do zastosowań w usługach internetowych. Do przeprowadzenia badań wykorzystano program Gatling, który udostępnia język definiowania testów obciążeniowych oraz opiera się na modelu aktorowym, w celu symulowania dużej liczby aktywnych użytkowników.
+Oprogramowanie wybrane do implementacji oraz przeprowadzenia testów wybrano na podstawie powszechności wykorzystania co określono przy wykorzystaniu statystyk dostępnych w publicznych repozytoriach \autocite{mavenrepo2015, npm2015, hex2015}. Rozwiązanie w języku Java oparto o serwer aplikacyjny WildFly będący, otwartą dla społeczności, dystrybucją serwera JBoss Enterprise Application Platform firmy RedHat. Wspiera on najnowszą dostępną wersję standardu Java EE 7. Dla implementacji w JavaScript i Node.js wykorzystano bibliotekę Express.js zapewniającą podstawowe mechanizmy wymagane do stworzenia aplikacji internetowej przy zapewnieniu stabilności dla rozwiązań produkcyjnych. Rozwiązanie w języku Elixir korzysta z pakietu Phoenix Framework, skupiającego dojrzałe technologie, przeznaczone do zastosowań w usługach internetowych. Do przeprowadzenia badań wykorzystano oprogramowanie Gatling. Udostępnia on, bazujący na języku Scala, język definiowania testów obciążeniowych.
+
+Wersje oprogramowania:
+
+ - Java: 1.8.0_66
+ - Wildfly: 9.0.1.Final
+ - Node.js: v5.3.0
+ - Express.js: 4.13.1
+ - Elixir: 1.1.1
+ - Phoenix Framework: 1.0.3
+ - Scala: 2.11.7
+ - Gatling: 2.1.7
 
 ## Duża liczba zapytań
 

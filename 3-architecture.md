@@ -24,7 +24,7 @@ Nie tylko technologia programowania jest niezależna od architektury, to samo ty
 Taki podział systemu wymaga mechanizmów zewnętrznej komunikacji pomiędzy usługami, których koszt jest dużo wyższy od wywołań wewnątrz aplikacji. W związku z tym funkcjonalności i odpowiedzialności muszą być odpowiednio zaprojektowane i wydzielone, aby zminimalizować konieczność komunikacji pomiędzy komponentami, co wiąże się z dodatkowymi nakładami na projektowanie.
 Również metody komunikacji odgrywają duże znaczenie. W przeszłości do komunikacji rozproszonych systemów wykorzystywana różne technologie i podejście. Dobrym przykładem jest Korporacyjna Szyna Usług (ang. *Enterprise Service Bus*), która skupia wiele skomplikowanych mechanizmów zarządzania usługami, trasowania wiadomości i transformacji danych. Społeczność wspierająca mikroserwisy proponuje wykorzystywanie prostych, lekkich rozwiązań komunikacyjnych. W tym celu często jest stosowany protokół HTTP w zastosowaniu interfejsów REST. \autocite{fowler2014microservice, fowler2015microservices, newman2015building}
 
-## Java
+## Architektura - Java
 
 Architektura złożonych systemów pisanych w Javie jest silnie związana z Javą Enterprise Edition, gdyż definiuje ona szereg standardów dla tworzenia logiki aplikacyjnej. Proces, w którym definiowane są owe standardy, jest przeprowadzany w ramach Java Community Process. Członkami komitetu, jak również osobami zabierającymi głos przy tworzeniu propozycji, jest społeczność użytkowników Javy i specjaliści w tej dziedzinie. Wielu z nich to przedstawiciele przedsiębiorstw aktywnie wykorzystujących te technologie, np. Credit Suisse, Ericsson, Fujitsu, IBM czy Intel\autocite{jcp2015}. Poprzez wkład tych i wielu innych firm Java Enterprise Edition jest powszechnie wykorzystywana między innymi w branży finansowej czy IT do tworzenia oprogramowania biznesowego. 
 
@@ -46,7 +46,7 @@ Przewidziano następujące komponenty:
 
 Model ten jest powszechnie stosowany nie tylko dla aplikacji w Javie, ale również przy użyciu wielu innych technologii. \autocite{eisele2015modern, jendrock2014jee}
 
-## JavaScript
+## Architektura - JavaScript
 
 Biorąc pod uwagę fakt, że JavaScript został stworzony do zastosowań w aplikacjach klienckich, środowisko to nie posiada ustandaryzowanych wzorców projektowania i tworzenia systemów informatycznych. Ze względu na dużą i różnorodną społeczność wielu programistów o odmiennym podłożu zawodowym, nieustannie powstaje wiele bibliotek i tworzonych jest wiele modeli aplikacyjnych, lecz jak dotąd nie wyłonił się z nich żaden dominujący paradygmat. Jedynym wspólnym ich elementem jest Node.js, lecz biblioteka ta nie dyktuje modeli ani wzorców architektonicznych poza posługiwaniem się zdarzeniami i odwołaniami obsługi tychże.    
 Programowanie w JavaScript w dużej mierze opiera się na obsłudze zdarzeń. Łatwo to zauważyć na przykładzie aplikacji przeglądarkowych, gdzie zdarzenia są wywoływane przez interakcje użytkownika z interfejsem, na przykład kliknięcia myszy czy przeciąganie obiektów. Z perspektywy projektu języka programowania w JavaScript wprowadzono ułatwienia dla programowania sterowanego zdarzeniami (ang. *event-driven programming*). Najważniejszym z nich jest wprowadzenie funkcji wyższego rzędu. Dzięki nim możliwe jest przekazywanie jako parametrów funkcji innych funkcji jako odwołania do wykonanej akcji.
@@ -103,7 +103,7 @@ System rejestrując jednostkę obsługi zdarzeń w dyspozytorze zaznacza o jakic
 Takie podejście pociąga za sobą szereg zalet jak i wad. Przede wszystkim zapewnia łatwą kontrolę nad współbieżnością. Reaktor kolejkuje zdarzenia na poziomie demultipleksowania i delegacji pracy do jednostek obsługi. Jest to zwykle wystarczające, aby wyeliminować potrzebę stosowania bardziej skomplikowanych metod synchronizacji i blokad w aplikacji. Dodatkowo wzorzec ten ułatwia rozdzielenie odpowiedzialności pomiędzy komponenty systemu. Demultipleksowanie oraz delegacja jest niezależna od aplikacji i może być reużywana w różnych projektach. Część funkcjonalna systemu jest rozdzielona pomiędzy jednostki obsługi zdarzeń i każda z nich jest odpowiedzialna za obsługę konkretnych typów zapytań.  
 Jednakże ceną przetwarzania jednowątkowego jest brak możliwości wywłaszczenia wątku, jednostki obsługi zdarzeń wykonują pracę nieprzerwanie. Z tego wynika, że żadne z nich nie powinno wykonywać blokujących operacji, ponieważ w takim przypadku jeden zablokowałby cały proces ograniczając responsywność systemu. Co więcej, aplikacje napisane z wykorzystaniem wzorca Rektor mogą być trudniejsze do analizy i rozwiązywania błędów, ze względu na odwrócony proces przepływu sterowania. Implementacja tego wzorca jest ograniczona ze względu na możliwości systemu operacyjnego, który musi wspierać nieblokujące operacje. Ten problem można obejść wykorzystując wiele wątków, w których przetwarzanie odbywa się w sposób blokujący, jednak wyzbywając się korzyści wynikających z braku przełączania kontekstu.\autocite{schmidt1995reactor}
 
-## Elixir
+## Architektura - Elixir
 
 Erlang, a zatem i Elixir, to nie tylko języki programowania, ale również zestaw narzędzi i wzorców programistycznych zwanych *Open Telecom Platform* (OTP). 
 

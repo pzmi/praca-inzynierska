@@ -2,6 +2,8 @@
 
 **Produktywność** - wielkość efektu produkcyjnego uzyskanego z danych nakładów. \autocite{sjp}
 
+## Kod
+
 Mierzenie produktywności nie jest prostym zadaniem, gdyż trudno określić obiektywną miarę. Na przestrzeni lat opracowano wiele metod wyznaczania produktywności pracy programisty. Najprostszą z nich jest liczba napisanych linii kodu. Na potrzeby tej rozprawy wybrano właśnie tę miarę, gdyż nie jest mierzona wielkość wykonanej pracy, a konfrontacja wykonania tego samego zadania w trzech różnych technologiach. 
 
 |              |            | Java | JavaScript | Elixir |
@@ -50,16 +52,10 @@ Pliki konfiguracyjne wszystkich trzech technologii zawierają informacje o proje
 
 TODO: Ilość linii kodu i linii konfiguracji. Środowisko programisty, dostępność narzędzi i bibliotek.
 
-## Java
+## Środowisko programisty
 
-mvnrepository, jcp, apache, eclipse
+Języki programowania to nie tylko kod i składnia. Istotnym językiem każdej technologii deweloperskiej jest środowisko, dostępność bibliotek. Znaczną część pracy można wykonać bez pisania ani jednej linijki kodu dzięki dostępnym publicznie bibliotekom. Dzięki temu zyskujemy przetestowaną funkcjonalność, gotową do użycia.
+Największym repozytorium bibliotek bazujących na wirtualnej maszynie Javy jest Central Repository\autocite{centralrepository}. Istniejąca od 2002 roku baza skupia około 130 tysięcy projektów, które w sumie udostępniły prawie 1,2 miliona artefaktów. Niestety nie są dostępne aktualne statystyki pobrań.\autocite{centralstats} Na dorobek Java i języków składa się praca wielu organizacji patronujące otwartym projektom. Wśród nich znajdują się fundacje jak Apache Software Foundation\autocite{apachefoundation} skupiająca ponad 350 projektów Open Source oraz inicjatyw obejmujących szerokie spektrum technologii, czy Eclipse Foundation, będąca członkiem komitetu Java Community Process. Na rozwój Javy mają również wpływ przedsiębiorstwa w różnych branżach. [patrz \ref{architektura---java}]
+npm, repozytorium modułów Node.js, gromadzi ich prawie 230 tysięcy, licząc ponad 140 milionów pobrań dziennie.\autocite{npm2015}
 
-## JavaScript
-
-npm
-
-## Elixir
-
-hex
-
-## Wnioski
+## Dyskusja

@@ -1,20 +1,20 @@
 # Wydajność
 
-Wydajność technologii można mierzyć pod wieloma różnymi aspektami, a na otrzymane wyniki wpływa duża liczba czynników. Przedstawiane środowiska programistyczne zostały przetestowane pod kontem wydajności w kilku odmiennych scenariuszach.
+Wydajność technologii można mierzyć pod wieloma różnymi aspektami, a na otrzymane wyniki wpływa duża liczba czynników. Przedstawiane środowiska programistyczne zostały przetestowane pod kątem wydajności, w kilku odmiennych scenariuszach.
 
 Wybrano 4 przypadki w 3 kategoriach:
 
  - Duża liczba zapytań:
      + zapytania nie wymagające dużej mocy obliczeniowej
  - Czasochłonne obliczenia:
-     + obliczenia na prostych liczbach
+     + obliczenia na liczbach całkowitych
      + operacje macierzowe
  - Ograniczenia wejścia/wyjścia
      + operacje na systemie plików
 
-Wyżej wymienione sytuacje są powszechnie spotykane we w współczesnych systemach informatycznych.
+Wyżej wymienione sytuacje są powszechnie spotykane w współczesnych systemach informatycznych.
 
-Badania przeprowadzono na sprzęcie o parametrach:
+Badania przeprowadzono na sprzęcie o następujących parametrach:
 
 Maszyna testowa:
 
@@ -28,10 +28,11 @@ Maszyna testująca:
  - Pamięć: 4GB DDR2 800MHz
  - System operacyjny: GNU/Linux 4.2.5-1-ARCH
 
-Na maszynę testującą celowo wybrano komputer o większej mocy, aby zapewnić ciągłość testów i uniknąć komplikacji wynikających z niewystarczającej mocy do analizy danych.  
-Komputery podłączono bezpośrednio w sieć o przepustowości 1Gb/s.
-
-Oprogramowanie wybrane do implementacji oraz przeprowadzenia testów wybrano na podstawie powszechności wykorzystania co określono przy wykorzystaniu statystyk dostępnych w publicznych repozytoriach \autocite{mavenrepo2015, npm2015, hex2015}. Rozwiązanie w języku Java oparto o serwer aplikacyjny WildFly będący, otwartą dla społeczności, dystrybucją serwera JBoss Enterprise Application Platform firmy RedHat. Wspiera on najnowszą dostępną wersję standardu Java EE 7. Dla implementacji w JavaScript i Node.js wykorzystano bibliotekę Express.js zapewniającą podstawowe mechanizmy wymagane do stworzenia aplikacji internetowej przy zapewnieniu stabilności dla rozwiązań produkcyjnych. Rozwiązanie w języku Elixir korzysta z pakietu Phoenix Framework, skupiającego dojrzałe technologie, przeznaczone do zastosowań w usługach internetowych. Do przeprowadzenia badań wykorzystano oprogramowanie Gatling. Udostępnia on, bazujący na języku Scala, język definiowania testów obciążeniowych.
+Na maszynę testującą celowo wybrano komputer o większej mocy, aby zapewnić ciągłość testów i uniknąć komplikacji wynikających z niewystarczającej mocy do analizy danych. Komputery podłączono bezpośrednio w sieć o przepustowości 1Gb/s.  
+Oprogramowanie wykorzystane do implementacji oraz przeprowadzenia testów wybrano na podstawie powszechności zastosowania. Parametr ten określono w oparciu statystyki dostępne w publicznych repozytoriach \autocite{npm2015,mavenrepo2015, hex2015}.  
+Rozwiązanie w języku Java stworzono na bazie serwera aplikacyjnego WildFly, będącego otwartą dla społeczności dystrybucją serwera JBoss Enterprise Application Platform firmy RedHat. Wspiera on najnowszą dostępną wersję standardu Java EE 7.  
+W implementacji kodu JavaScript i Node.js wykorzystano bibliotekę Express.js udostępniającą podstawowe mechanizmy wymagane do stworzenia aplikacji internetowej, przy zapewnieniu stabilności dla rozwiązań produkcyjnych.  Rozwiązanie w języku Elixir korzysta z pakietu Phoenix Framework, gromadzącego dojrzałe technologie, przeznaczone do zastosowań w usługach internetowych.  
+Do przeprowadzenia badań wykorzystano oprogramowanie Gatling. Udostępnia ono, bazujący na języku Scala, język definiowania testów obciążeniowych.
 
 Wersje oprogramowania:
 
@@ -46,34 +47,34 @@ Wersje oprogramowania:
 
 ## Duża liczba zapytań
 
-W dobie Internetu znaczna cześć aplikacji wykorzystywanych na co dzień korzysta z łączności sieciowej. W ostatnich latach obserwuje się znaczny wzrost na rynku usług zdalnych, a także zwiększenie liczby użytkowników owych usług. Z tego względu współczesne systemy informatyczne muszą być w stanie obsłużyć znaczne liczby jednoczesnych połączeń i zapytań.
+Wiele aplikacji używanych na co dzień korzysta z łączności sieciowej. Obserwuje się w ostatnich latach znaczny wzrost na rynku usług zdalnych, a także zwiększenie liczby użytkowników owych usług. Z tego względu współczesne systemy informatyczne muszą być w stanie obsłużyć znaczne liczby jednoczesnych połączeń i zapytań.
 
-Test polega na wykonaniu metody HTTP GET na serwerze zwracającym prosty łańcuch tekstowy. Zasymulowano 350000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
+Test polega na wykonaniu metody HTTP GET na serwerze zwracającym prosty łańcuch tekstowy. Zasymulowano 350000 użytkowników wykonujących żądanie niezależnie, rozłożonych na przestrzeni 100 sekund.
 
-Implementacje we wszystkich trzech technologiach są trywialne, polegające na prostym umieszczeniu w odpowiedzi łańcucha znaków, więc zostały pominięte.
+Implementacje we wszystkich trzech technologiach są trywialne, polegają na prostym umieszczeniu łańcucha znaków w odpowiedzi, więc zostały pominięte.
 
 ### Java
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
-Na połowę zapytań otrzymano odpowiedź w czasie poniżej 800 milisekund. Nieznaczna cześć wysłanych żądań została oznaczona jako błędne.
+Na połowę zapytań otrzymano odpowiedź w czasie poniżej 800 milisekund, a nieznaczna cześć z nich została oznaczona jako błędne.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
-Liczba aktywnych użytkowników przedstawia zapytania oczekujące na odpowiedź w danej chwili czasu. Na wykresie liczba aktywnych użytkowników rośnie w przybliżeniu jednostajnie. Po wysłaniu ostatniego żądania ostatni użytkownik otrzymał odpowiedź po 30 sekundach.
+*Liczba aktywnych użytkowników* przedstawia zapytania oczekujące na odpowiedź w danej chwili czasu. Liczba aktywnych użytkowników rośnie w przybliżeniu jednostajnie. Odpowiedź na ostatnie żądanie użytkownik otrzymał po 30 sekundach od jego wysłania.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 Większość czasów odpowiedzi plasuje się na lewym krańcu wykresu. Występują pojedyncze wyjątki, niewielka część przekroczyła maksymalny czas oczekiwania 60 sekund.
@@ -81,15 +82,16 @@ Większość czasów odpowiedzi plasuje się na lewym krańcu wykresu. Występuj
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
+\label{java:simple:requests}
 \end{figure}
 
-Wirtualna maszyna Javy potrzebuje czasu na tak zwane *rozgrzanie się*. Wtedy dokonuje automatycznej optymalizacji kodu bajtowego. Zjawisko to można zaobserwować na powyższym wykresie. Na początku testu wiele zapytań zostało oznaczonych jako błędnych, po dokonaniu poprawek przez maszynę wirtualną liczba przyjmowanych zapytań na sekundę ustabilizowała się.
+Wirtualna maszyna Javy potrzebuje czasu na, tak zwane, *rozgrzanie się*. Wtedy dokonuje wczytania niezbędnych komponentów i automatycznej optymalizacji kodu bajtowego. Zjawisko to można zaobserwować na wykresie \ref{java:simple:requests}. Na początku testu wiele żądań zostało oznaczonych jako błędnych, lecz po dokonaniu poprawek przez maszynę wirtualną liczba przyjmowanych zapytań na sekundę ustabilizowała się.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \label{java:simple:responses}
 \end{figure}
 
@@ -98,18 +100,18 @@ Wykres \ref{java:simple:responses} również odzwierciedla proces optymalizacji.
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \label{java:simple:response_percentile}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/simpletest/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \label{java:simple:latency_percentile}
 \end{figure}
 
-Rysunki \ref{java:simple:response_percentile},\ref{java:simple:latency_percentile} przedstawiają dane jedynie dla poprawnie przetworzonych zapytań. Czas odpowiedzi jest różnicą czasu otrzymania pełnej odpowiedzi od czasu wysłania zapytania. Opóźnienie stanowi czas, który upłynął od wysłania zapytania do otrzymania pierwszego bajta odpowiedzi. W granicach 20:50:10 zauważono zmianę zarówno w czasie odpowiedzi jak i opóźnieniu. Została ona poprzedzona utratą części przetwarzanych zapytań, wywołaną uruchomieniem odśmiecacza pamięci (ang. *garbage collector*). Po tym zabiegu czasy poprawiły się i zostały zakwalifikowane do niższej kategorii na wykresach percentyli.
+Rysunki \ref{java:simple:response_percentile},\ref{java:simple:latency_percentile} przedstawiają dane jedynie dla poprawnie przetworzonych zapytań. *Czas odpowiedzi* jest różnicą czasu otrzymania pełnej odpowiedzi od czasu wysłania zapytania. *Opóźnienie* stanowi czas, który upłynął od wysłania zapytania do otrzymania pierwszego bajta odpowiedzi. W granicach 20:50:10 zauważono zmianę zarówno w czasie odpowiedzi jak i opóźnieniu. Została ona poprzedzona utratą części przetwarzanych zapytań, wywołaną uruchomieniem odśmiecacza pamięci (ang. *garbage collector*). Po tym zabiegu czasy poprawiły się i zostały zakwalifikowane do niższej kategorii na wykresach percentyli.
 
 |                        | W sumie  | OK       | KO     |
 |------------------------|----------|----------|--------|
@@ -132,7 +134,7 @@ Table: Statystyki Java w teście prostego zapytania
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/simpletest/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
 83% zapytań zostało obsłużonych w czasie większym niż 1200 milisekund oraz 4% z całości oznaczono jako błędne.
@@ -140,7 +142,7 @@ Table: Statystyki Java w teście prostego zapytania
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/simpletest/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w całym czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Liczba aktywnych użytkowników rośnie liniowo i po otrzymaniu ostatniego żądania również liniowo spada obsługując oczekujących użytkowników.
@@ -148,21 +150,21 @@ Liczba aktywnych użytkowników rośnie liniowo i po otrzymaniu ostatniego żąd
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/simpletest/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/simpletest/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
-Liczba przyjmowanych zapytań na sekundę utrzymuje stały poziom w czasie trwania testu. Zauważono nieznaczne zaburzenia stanowiące nieznaczną część całości.
+Liczba przyjmowanych zapytań na sekundę utrzymuje stały poziom w czasie trwania testu. Zauważono małe zaburzenia stanowiące nieznaczną część całości testu.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/simpletest/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Podobnie jak przyjmowanie, przetwarzanie i czas odpowiedzi na żądania został utrzymany na stałym poziomie. Jednakże liczba zapytań przekroczyła możliwości obsługi, w związku z czym po 60 sekundach zauważono wzrost w ilości błędów.
@@ -170,7 +172,7 @@ Podobnie jak przyjmowanie, przetwarzanie i czas odpowiedzi na żądania został 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/simpletest/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Percentyle czasu odpowiedzi oraz opóźnienia utrzymują się na zbliżonym poziomie w całym czasie trwania testu.
@@ -178,7 +180,7 @@ Percentyle czasu odpowiedzi oraz opóźnienia utrzymują się na zbliżonym pozi
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/simpletest/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 |                        | W sumie  | OK       | KO     |
@@ -204,15 +206,15 @@ Table: Statystyki JavaScript w teście prostego zapytania
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/simpletest/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
-Spośród wszystkich zapytań na 93% otrzymano odpowiedzi w czasie mniejszym niż 800ms oraz brak błędów.
+Spośród wszystkich zapytań, na 93% otrzymano odpowiedzi w czasie mniejszym niż 800ms oraz nie wykazano żadnych błędów.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/simpletest/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Liczba aktywnych użytkowników stabilizuje się po 25 sekundach od rozpoczęcia testu.
@@ -220,21 +222,21 @@ Liczba aktywnych użytkowników stabilizuje się po 25 sekundach od rozpoczęcia
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/simpletest/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/simpletest/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
-Zapytania przyjmowano na stałym poziomie po ustabilizowaniu.
+Na wykresach \ref{elixir:simple:response_percentile} oraz \ref{elixir:simple:latency_percentile} wyraźnie widać czas stabilizacji aplikacji. Po nim, aplikacja zaczęła przyjmować zapytania na stałym poziomie.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/simpletest/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Wykres liczby odpowiedzi odpowiada wykresowi liczby zapytań, stała liczba odpowiedzi na sekundę i brak błędów.
@@ -242,18 +244,18 @@ Wykres liczby odpowiedzi odpowiada wykresowi liczby zapytań, stała liczba odpo
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/simpletest/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \label{elixir:simple:response_percentile}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/simpletest/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \label{elixir:simple:latency_percentile}
 \end{figure}
 
-Na \ref{elixir:simple:response_percentile} oraz \ref{elixir:simple:latency_percentile} wyraźnie widać czas stabilizacji aplikacji.
+
 
 |                        | W sumie | OK      | KO |
 |------------------------|---------|---------|----|
@@ -275,7 +277,8 @@ Table: Statystyki Elixir w teście prostego zapytania
 
 ## Czasochłonne obliczenia
 
-Współczesne systemy informatyczne wykonują wiele skomplikowanych operacji. Nie liczy się jedynie możliwość obsługi dużej liczby zapytań, ale także wykorzystanie mocy obliczeniowej sprzętu do wykonywania operacji. Celem tego testu jest sprawdzenie wydajności technologii przy jednoczesnym dostępnie wielu użytkowników jednocześnie testując wsparcie dla dużych liczb. 
+Współczesne systemy informatyczne wykonują wiele skomplikowanych operacji. Ważna jest nie tylko możliwość obsługi dużej liczby zapytań, ale także wykorzystanie mocy obliczeniowej sprzętu do wykonywania operacji.  
+Celem tego testu jest sprawdzenie wydajności technologii przy równoczesnym dostępnie wielu użytkowników, jednocześnie testując wsparcie dla dużych liczb. 
 
 Test polega na wykonaniu metody HTTP GET na serwerze zwracającym 100000 element ciągu Fibonacciego. Zasymulowano 1000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
 
@@ -306,12 +309,12 @@ public class Fibonacci {
 }
 ~~~~
 
-W implementacji zastosowano iteracyjny algorytm wyznaczania n-tego elementu ciągu Fibonacciego, ze względu na możliwość wystąpienia przepełnienia stosu przy wykorzystaniu wersji rekurencyjnej. Do przechowywania dużych wartości całkowitych wykorzystano standardową klasę BigDecimal.
+W implementacji zastosowano iteracyjny algorytm wyznaczania n-tego elementu ciągu Fibonacciego. Wybrano tę wersję algorytmu ze względu na możliwość wystąpienia przepełnienia stosu przy wykorzystaniu jej rekurencyjnego odpowiednika. Do przechowywania dużych wartości całkowitych wykorzystano klasę BigDecimal, należącą do standardowej biblioteki Javy.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/fibonacci/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
 74% zapytań zostało oznaczonych jako błędne z powodu przekroczenia limitu oczekiwania wynoszącego 60 sekund.
@@ -319,39 +322,39 @@ W implementacji zastosowano iteracyjny algorytm wyznaczania n-tego elementu cią
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/fibonacci/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/fibonacci/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/fibonacci/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
-Po upłynięciu 1/3 testu serwer przestał przyjmować zapytania. Wynika to z przyjętego modelu współbieżności. Każde nadchodzące zapytanie jest obsługiwane w nowym wątku lub jest reużywany wątek używany uprzednio. Przy takim natężeniu wymagających czasowo żądań, osiągnięto limit wykorzystywanych wątków, w związku z czym kolejne nadchodzące zapytania nie mogły zostać przetworzone.
+Po upłynięciu 1/3 testu serwer przestał przyjmować zapytania. Wynika to z przyjętego modelu współbieżności. Każde nadchodzące zapytanie jest obsługiwane w nowym wątku lub jest reużywany wątek używany uprzednio. Przy takim natężeniu wymagających czasowo żądań, osiągnięto limit wykorzystywanych wątków. W związku z tym kolejne nadchodzące zapytania nie mogły zostać przetworzone.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/fibonacci/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/fibonacci/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/fibonacci/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 |                        | W sumie | OK      | KO    |
@@ -397,50 +400,50 @@ function calculateNth(n) {
 }
 ~~~~
 
-Powyższa implementacja jest translacją wersji w języku Java. Do przechowywania dużych wartości całkowitych wykorzystano bibliotekę bignum.
+Powyższa implementacja jest translacją wersji w języku Java. JavaScript nie posiada w standardzie wsparcia dla dużych liczb całkowitych. Do ich przechowywania wykorzystano bibliotekę *bignum*.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/fibonacci/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
-96% zapytań zostało oznaczonych jako błędnych ze względu na przekroczenie czasu żądania wynoszącego 60 sekund. JavaScript nie posiada wsparcia dla dużych liczb. Wykorzystana biblioteka bignum jest implementacją natywną. Ze względu na charakterystykę zadania, wykonywanie jest wiele operacji na dużych liczbach. Z tego powodu silnik V8 języka JavaScript jest zmuszony do wykonywania ciągłych odwołań do natywnego kodu, co znaczenie spowalnia pracę aplikacji.
+96% zapytań zostało oznaczonych jako błędnych ze względu na przekroczenie czasu żądania wynoszącego 60 sekund. Wykorzystana biblioteka *bignum* jest implementacją natywną. Ze względu na charakterystykę zadania, wykonywanie jest wiele operacji na dużych liczbach. Z tego powodu silnik V8 języka JavaScript jest zmuszony do wykonywania ciągłych odwołań do natywnego kodu, co znaczenie spowalnia pracę aplikacji.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/fibonacci/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/fibonacci/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/fibonacci/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/fibonacci/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/fibonacci/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/fibonacci/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 |                        | W sumie | OK    | KO    |
@@ -477,12 +480,12 @@ defmodule Test.Calculation.Fibonacci do
 end
 ~~~~
 
-W języku Elixir, z racji jego funkcyjnego charakteru, nie istnieje pojęcie pętli. Z tego względu implementacja algorytmu wykorzystuje rekurencję. Użyto *rekurencji ogonowej* (*rekurencji prawostronnej*, ang. *tail call*), która umożliwia automatyczną optymalizację do wersji iteracyjnej, co zwiększa wydajność i eliminuje zagrożenie przepełnienia stosu.
+W języku Elixir, z racji jego funkcyjnego charakteru, nie istnieje pojęcie pętli. Z tego względu wykorzystano rekurencyjną wersję algorytmu. Użyto *rekurencji ogonowej* (*rekurencji prawostronnej*, ang. *tail call*), która umożliwia automatyczną optymalizację kodu rekurencyjnego do wersji iteracyjnej. Zabieg ten zwiększa wydajność i eliminuje zagrożenie przepełnienia stosu.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/fibonacci/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
 1/3 zapytań została oznaczona jako błędne ze względu na przekroczenie maksymalnego czasu żądania wynoszącego 60 sekund. Poprawne odpowiedzi otrzymano w czasie powyżej 1200 milisekund. Jedynie nieznaczną część z nich otrzymano poniżej 1200 milisekund.
@@ -490,19 +493,19 @@ W języku Elixir, z racji jego funkcyjnego charakteru, nie istnieje pojęcie pę
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/fibonacci/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/fibonacci/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/fibonacci/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
 W połowie testu obciążony system ograniczył przyjmowanie nadchodzących zapytań czego rezultatem są zwrócone błędy.
@@ -510,19 +513,19 @@ W połowie testu obciążony system ograniczył przyjmowanie nadchodzących zapy
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/fibonacci/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/fibonacci/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/fibonacci/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 |                        | W sumie  | OK     | KO     |
@@ -545,9 +548,9 @@ Table: Statystyki Elixir w teście z wykorzystaniem czasochłonnych obliczeń
 
 ## Operacje na zbiorach danych
 
-Test \ref{czasochux142onne-obliczenia} ma za zadanie przetestować dużą liczbę wykonywanych operacji na każde zadanie. Celem tego testu jest porównanie każdej z wybranych technologii w kategorii możliwości manipulowania danymi.
+Zadaniem testu \ref{czasochux142onne-obliczenia} jest przetestowanie dużej liczby wykonywanych operacji na każde otrzymane żądanie. Celem tego testu jest porównanie każdej z wybranych technologii w kategorii możliwości manipulowania danymi pod obciążeniem.
 
-Test polega na wykonaniu metody HTTP POST, w ciele której umieszczono wygenerowaną macierz liczb całkowitych. Zadaniem serwera jest zwrócenie transponowanej macierzy w odpowiedzi. Zasymulowano 10000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
+Test polega na wykonaniu metody HTTP POST, w ciele której umieszczono wygenerowaną macierz liczb całkowitych o rozmiarze 100 na 100. Zadaniem serwera jest zwrócenie w odpowiedzi transponowanej macierzy. Zasymulowano 10000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
 
 ### Java
 
@@ -569,12 +572,12 @@ public class Matrix {
 }
 ~~~~
 
-Powyższy kod pobiera wymiary $x, y$ przekazanej macierzy $a$, aby utworzyć nową macierz $b$ o wymiarach $y, x$. Następnie, wiersz po wierszu i element o elemencie wiersza, wartości macierzy $a$ są przepisywane do macierzy $b$, tak że $a_{xy} = b_{yx}$
+Powyższy kod pobiera wymiary $x, y$ przekazanej macierzy $a$, aby utworzyć nową macierz $b$ o wymiarach $y, x$. Następnie, wiersz po wierszu i element po elemencie z każdego wiersza, wartości macierzy $a$ są przepisywane do macierzy $b$, tak aby $a_{xy} = b_{yx}$
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/matrix/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
 Korzystając z implementacji w języku Java żadne z zapytań nie zwróciło błędu. Na 99% żądań odpowiedź otrzymano poniżej 800 milisekund, a jedynie 83 z nich przetworzono powyżej tej granicy.
@@ -582,42 +585,42 @@ Korzystając z implementacji w języku Java żadne z zapytań nie zwróciło bł
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/matrix/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/matrix/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/matrix/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/matrix/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
-Zauważono ubytek, a zaraz po nim skok liczby odpowiedzi na sekundę w początkowej fazie testu. Po początkowej inicjalizacji, każdy nowy użytkownik został obsłużony na bieżąco.
+Zauważono ubytek, a zaraz po nim skok liczby odpowiedzi na sekundę w początkowej fazie testu. Po wstępnej inicjalizacji aplikacji, każdy nowy użytkownik został obsłużony na bieżąco.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/matrix/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/matrix/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
-Wystąpiła mała różnica w czasach odpowiedzi i opóźnienia pomiędzy poszczególnymi zapytaniami w czasie trwania testu, zachowano równy poziom.
+Wystąpiła niewielka różnica w czasach odpowiedzi i opóźnienia pomiędzy poszczególnymi zapytaniami w czasie trwania testu.
 
 |                        | W sumie | OK     | KO |
 |------------------------|---------|--------|----|
@@ -662,52 +665,52 @@ Implementacja ta jest translacją z języka Java, jednak każdy z wierszy jest t
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/matrix/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
-78% ze wszystkich zapytań zostało obsłużonych poniżej 800 milisekund oraz żadne nie przekroczyło granicy czasu odpowiedzi 1200 milisekund.
+78% ze wszystkich zapytań zostało obsłużonych poniżej 800 milisekund oraz żadne nie przekroczyło granicy 1200 milisekund czasu odpowiedzi.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/matrix/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/matrix/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/matrix/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/matrix/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
-Wszystkie żądania przyjęto niezwłocznie do obsługi, zaś wykres czasu odpowiedzi przedstawia niemalże cykliczne skoki. Node.js operuje jednym wątkiem w jednym procesie. W czasie testu system operacyjny próbował starał się zbalansować pracę obydwu dostępnych rdzeni przenosząc obciążenie pomiędzy nimi.
+Wszystkie żądania przyjęto niezwłocznie do obsługi, zaś wykres czasu odpowiedzi przedstawia niemalże cykliczne skoki. Node.js operuje jednym wątkiem w jednym procesie. W czasie testu system operacyjny starał się zbalansować pracę obydwu dostępnych rdzeni procesora przenosząc obciążenie pomiędzy nimi.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/matrix/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \label{js:matrix:response_percentile}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/matrix/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \label{js:matrix:latency_percentile}
 \end{figure}
 
-Na podstawie wykresów \ref{js:matrix:response_percentile} oraz \ref{js:matrix:latency_percentile} można zaobserwować wpływ optymalizacji przetwarzania zapytań przez silnik V8. Czasy odpowiedzi jak i opóźnienie wyraźnie spada w czasie trwania testu.
+Na podstawie wykresów \ref{js:matrix:response_percentile} oraz \ref{js:matrix:latency_percentile} można zaobserwować wpływ optymalizacji przetwarzania zapytań przez silnik V8. Czas odpowiedzi, jak i opóźnienie wyraźnie spada podczas trwania testu.
 
 |                        | W sumie | OK     | KO |
 |------------------------|---------|--------|----|
@@ -744,7 +747,7 @@ Transpozycja macierzy w języku Elixir korzysta z jego funkcyjnych możliwości.
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/matrix/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
 Błędne zapytania stanowią 7% całego testu, pozostałe zaś zostały przetworzone w czasie powyżej 1200 milisekund.
@@ -752,39 +755,40 @@ Błędne zapytania stanowią 7% całego testu, pozostałe zaś zostały przetwor
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/matrix/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/matrix/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/matrix/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
-Zapytania zostały przyjęte na stałym poziomie, jednak część zapytań, ze względu na obciążenie została odrzucona, a odpowiedzi na nie przekroczyły maksymalny czas żądania wynoszący 60 sekund.
+Liczba przyjmowanych żądań na sekundę utrzymywała się na stałym poziomie. 
+Jednak, część zapytań, ze względu na obciążenie została odrzucona, a odpowiedzi na nie przekroczyły maksymalny czas żądania wynoszący 60 sekund.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/matrix/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/matrix/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/matrix/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Pomimo utraty części zapytań w granicach 19:37:25 czas odpowiedzi oraz opóźnienie uległy poprawie.
@@ -820,7 +824,7 @@ Implementacje we wszystkich trzech technologiach są trywialne, korzystają ze s
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/file/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
 Nie utracono żadnego żądania i żadna odpowiedź nie została oznaczona jako błędna, lecz 100% z nich otrzymano w czasie większym niż 1200 milisekund.
@@ -828,7 +832,7 @@ Nie utracono żadnego żądania i żadna odpowiedź nie została oznaczona jako 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/file/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Liczba aktywnych użytkowników rośnie jednostajnie ze względu na oczekiwanie na obsługę poprzedzających zapytań.
@@ -836,19 +840,19 @@ Liczba aktywnych użytkowników rośnie jednostajnie ze względu na oczekiwanie 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/file/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/file/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/file/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Serwer utrzymał stały poziom obsługi przychodzących połączeń oraz odpowiedzi.
@@ -856,16 +860,16 @@ Serwer utrzymał stały poziom obsługi przychodzących połączeń oraz odpowie
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/file/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/java/file/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
-Czas odpowiedzi oraz opóźnienie pokrywają się z liczbą aktywnych użytkowników. Wraz z wzrostem liczby oczekujących zapytań wzrasta czas odpowiedzi oraz opóźnienie. Wystąpiło nieznaczne rozwarstwienie w czasach odpowiedzi w danej chwili czasu testu.
+Czas odpowiedzi oraz opóźnienie pokrywają się z liczbą aktywnych użytkowników. Wraz ze wzrostem liczby oczekujących zapytań wzrasta czas odpowiedzi oraz opóźnienie. Wystąpiło nieznaczne rozwarstwienie w czasach odpowiedzi w danej chwili czasu testu.
 
 |                        | W sumie | OK      | KO |
 |------------------------|---------|---------|----|
@@ -890,7 +894,7 @@ Table: Statystyki Java w teście z ograniczeniami wejścia/wyjścia
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/file/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
 Serwer na 10% zapytań wysłał odpowiedź w czasie poniżej 800 milisekund, na kolejnych 9% w czasie pomiędzy 800 a 1200 milisekund, zaś pozostałe powyżej 1200 milisekund.
@@ -898,7 +902,7 @@ Serwer na 10% zapytań wysłał odpowiedź w czasie poniżej 800 milisekund, na 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/file/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Liczba aktywnych użytkowników rośnie jednostajnie ze względu na oczekiwanie na obsługę poprzedzających zapytań.
@@ -906,33 +910,33 @@ Liczba aktywnych użytkowników rośnie jednostajnie ze względu na oczekiwanie 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/file/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/file/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/file/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
-Zarówno liczba zapytań jak i odpowiedzi utrzymano na stałym poziomie.
+Zarówno liczbę zapytań jak i odpowiedzi utrzymano na stałym poziomie.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/file/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/js/file/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Czas odpowiedzi oraz opóźnienie rosną wraz z wzrastającą liczbą aktywnych użytkowników, oczekujących na odpowiedź. Opóźnienia oraz czasy odpowiedzi w danej chwili czasu są niejednorodne, rozwarstwienie rośnie w miarę przybywania aktywnych użytkowników.
@@ -960,15 +964,15 @@ Table: Statystyki JavaScript w teście z ograniczeniami wejścia/wyjścia
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/file/screenshots/response_times.png}
-\caption{Wykres czasu odpowiedzi na zapytania}
+\caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
-Zaledwie 2% zapytań obsłużono w czasie poniżej 800 milisekund, a 90% całości powyżej 1200 milisekund. Pozostałe żądania trafiły pomiędzy te dwie grupy, a żadne z odpowiedzi nie została oznaczona błędem.
+Zaledwie 2% zapytań obsłużono w czasie poniżej 800 milisekund, 90% całości powyżej 1200 milisekund, pozostałe żądania trafiły pomiędzy te dwie grupy. Żadna z odpowiedzi nie została oznaczona błędem.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/file/screenshots/active_users.png}
-\caption{Wykres aktywnych użytkowników w czasie trwania testu}
+\caption{Wykres aktywnych użytkowników w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Liczba aktywnych użytkowników rośnie jednostajnie ze względu na oczekiwanie na obsługę poprzedzających zapytań.
@@ -976,19 +980,19 @@ Liczba aktywnych użytkowników rośnie jednostajnie ze względu na oczekiwanie 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/file/screenshots/distribution.png}
-\caption{Wykres rozkładu czasu odpowiedzi w czasie testu}
+\caption{Wykres rozkładu czasu odpowiedzi w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/file/screenshots/requests.png}
-\caption{Wykres liczby zapytań na sekundę w czasie testu}
+\caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/file/screenshots/responses.png}
-\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu}
+\caption{Wykres liczby odpowiedzi na sekundę w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Utrzymano stały poziom poziom obsługi połączeń przychodzących oraz przetwarzania odpowiedzi.
@@ -996,13 +1000,13 @@ Utrzymano stały poziom poziom obsługi połączeń przychodzących oraz przetwa
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/file/screenshots/response_percentile.png}
-\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu}
+\caption{Wykres percentyli czasu odpowiedzi w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[resolution=150]{test_results/elixir/file/screenshots/latency_percentile.png}
-\caption{Wykres percentyli opóźnienia w czasie trwania testu}
+\caption{Wykres percentyli opóźnienia w czasie trwania testu (źródło: praca własna)}
 \end{figure}
 
 Czas odpowiedzi oraz opóźnienie rosną wraz z wzrastającą liczbą aktywnych użytkowników, oczekujących na odpowiedź. Opóźnienia oraz czasy odpowiedzi w danej chwili czasu są niejednorodne, rozwarstwienie rośnie w miarę przybywania aktywnych użytkowników.
@@ -1033,7 +1037,7 @@ Table: Statystyki Elixir w teście z ograniczeniami wejścia/wyjścia
 \caption{Wykres średniej liczby zapytań dla prostych zapytań}
 \end{figure}
 
-Dla testu dużej liczby prostych zapytań, pod względem średniej liczby zapytań najlepszy wynik Elixir, osiągając wynik 3498,74 żądań na sekundę przy 100% skuteczności odpowiedzi. Zastosowanie modelu aktorowego do obsługi zapytań sprowadza się do oddelegowania każdego przychodzącego żądania do nowego aktora. Ta strategia wypadła lepiej od tej przyjętej w Javie, która zakłada wykorzystywanie wątków systemu operacyjnego do przetwarzania zapytań. Najgorszy wynik otrzymano przy użyciu JavaScript. Średnia liczba otrzymanych błędnych odpowiedzi niewiele różni się pomiędzy Javą i JavaScriptem, lecz przy 74% wydajności JavaScriptu względem Javy.
+W przypadku testu dużej liczby jednoczesnych zapytań najlepszy wynik otrzymał Elixir. Osiągnął 3498,74 żądań na sekundę, a żadne z nich nie otrzymało błędnej odpowiedzi. Zastosowanie modelu aktorowego do obsługi zapytań sprowadza się do oddelegowania każdego przychodzącego żądania do nowego aktora. Strategia ta wypadła lepiej od odpowiednika w Javie, zakładającego wykorzystywanie wątków systemu operacyjnego do przetwarzania zapytań. Najgorszy wynik otrzymano przy użyciu JavaScript. Średnia liczba otrzymanych błędnych odpowiedzi niewiele różni się pomiędzy Javą i JavaScriptem, lecz przy 74% wydajności JavaScriptu względem Javy.
 
 \begin{figure}[!ht]
 \centering
@@ -1047,7 +1051,7 @@ Dla testu dużej liczby prostych zapytań, pod względem średniej liczby zapyta
 \caption{Wykres czasu odpowiedzi dla prostych zapytań}
 \end{figure}
 
-Jednakże znaczący wpływ w tym przypadku wywarła optymalizacja w czasie wykonywania programu. Czasy pierwszych 20 sekund przetwarzania, chociaż niższe od ekwiwalentnych w Javie i JavaScripcie, są nieporównywalnie wyższe od kolejnych. Wirtualna maszyna Erlanga wykryła powtarzający się wzorzec i stworzyła optymalny kod dla tego przypadku. Powtórne testy wykazały takie same wyniki w każdej z prób. Średni czas odpowiedzi dla Javy i JavaScriptu jest porównywalny z nieznaczącą przewagą pierwszej technologii lecz z kosztem na odchyleniu standardowym ze względu na wyższy czas maksymalny.
+W tym przypadku znaczący wpływ  wywarła optymalizacja w czasie wykonywania programu. Czasy odpowiedzi pierwszych 20 sekund przetwarzania w Elixirze, chociaż niższe od ekwiwalentnych w Javie i JavaScripcie, są nieporównywalnie wyższe od kolejnych. Wirtualna maszyna Erlanga wykryła powtarzający się wzorzec i stworzyła optymalny kod dla tego przypadku. Powtórne testy wykazały takie same wyniki w każdej z prób. Średni czas odpowiedzi dla Javy i JavaScriptu jest porównywalny, z nieznaczącą przewagą pierwszej technologii. Rezultat ten odbił się na odchyleniu standardowym ze względu na wyższy czas maksymalny w Javie.
 
 \begin{figure}[!ht]
 \centering
@@ -1055,22 +1059,22 @@ Jednakże znaczący wpływ w tym przypadku wywarła optymalizacja w czasie wykon
 \caption{Wykres średniej liczby zapytań dla wyliczenia liczby ciągu Fibonacciego}
 \end{figure}
 
-Pomimo zbliżonej średniej liczbie zapytań na sekundę pomiędzy Javą i Elixirem w grupie czasochłonnych obliczeń dla przypadku obliczania liczby Fibonacciego Elixir osiągnął najlepszy wynik pod względem średniej liczby zapytań na sekundę oraz odsetka błędnych odpowiedzi. Procent poprawnie przetworzonych zapytań Javy i JavaScriptu, odpowiednio 26% i 4%, jest nieporównywalny z Elixirem przy 75%.
+W grupie czasochłonnych obliczeń, dla przypadku obliczania liczby Fibonacciego, pomimo zbliżonej średniej liczbie zapytań na sekundę pomiędzy Javą i Elixirem,  Elixir osiągnął lepszy wynik pod względem średniej liczby zapytań na sekundę oraz odsetka błędnych odpowiedzi. Procent poprawnie przetworzonych zapytań Javy i JavaScriptu, odpowiednio 26% i 4%, jest nieporównywalny z 75% Elixira.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/fib_percentage.png}
 \caption{Wykres poprawnej wymiany zapytań i odpowiedzi dla wyliczenia liczby ciągu Fibonacciego}
-\label{summary:fib:response}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/fib_response.png}
 \caption{Wykres czasu odpowiedzi dla wyliczenia liczby ciągu Fibonacciego}
+\label{summary:fib:response}
 \end{figure}
 
-Czasy odpowiedzi dla każdej z trzech testowanych technologii plasują się na podobnym poziomie, z różnicami jedynie w minimalnych czasach odpowiedzi. Jednakże rysunek \ref{summary:fib:response} przedstawia wyniki jedynie dla odpowiedzi poprawnych. W przypadku technologii Java i JavaScript wyniki mogą stanowić źródło nieprawdy, gdyż mała cześć całości żądań testu została przetworzona poprawnie.
+Czasy odpowiedzi dla każdej z trzech testowanych technologii plasują się na podobnym poziomie, z różnicami jedynie w czasach minimalnych. Należy jednak wziąć pod uwagę fakt, że rysunek \ref{summary:fib:response} przedstawia wyniki jedynie dla odpowiedzi poprawnych. W przypadku technologii Java i JavaScript wyniki mogą stanowić źródło nieprawdy, gdyż niewielka cześć całości żądań testu została przez nie przetworzona poprawnie.
 
 \begin{figure}[!ht]
 \centering
@@ -1078,7 +1082,7 @@ Czasy odpowiedzi dla każdej z trzech testowanych technologii plasują się na p
 \caption{Wykres średniej liczby zapytań dla transpozycji macierzy}
 \end{figure}
 
-W przypadku transpozycji macierzy Java oraz JavaScript uzyskały niemalże wyniki. Rozwiązania z wykorzystaniem obu technologii obsłużyły poprawnie wszystkie zapytania z wynikiem około 100 zapytań na sekundę. 
+W przypadku transpozycji macierzy Java oraz JavaScript uzyskały niemalże identyczne wyniki. Rozwiązania z wykorzystaniem obu technologii obsłużyły poprawnie wszystkie zapytania z wynikiem około 100 zapytań na sekundę. 
 
 \begin{figure}[!ht]
 \centering
@@ -1092,7 +1096,7 @@ W przypadku transpozycji macierzy Java oraz JavaScript uzyskały niemalże wynik
 \caption{Wykres czasu odpowiedzi dla transpozycji macierzy}
 \end{figure}
 
-W kategorii czasu odpowiedzi Java wypadła lepiej od JavaScript ze średnim czasem 162 milisekund przeciwko 644 milisekundom. Jednakże dla tego testu wyniki Elixira są znaczenie gorsze od dwóch pozostałych technologii osiągając średni czas odpowiedzi równy 22038 milisekund oraz tracąc 7% zapytań. Tak znaczące pogorszenie w stosunku do poprzednich testów wynika z przyjętego modelu obliczeń. Model aktorowy, który uprzednio stanowił atut jest przyczyną dużych czasów odpowiedzi. Z powodu tego, że lekkie procesy w wirtualnej maszynie Erlanga nie współdzielą stanu, wszystkie dane pomiędzy nimi są kopiowane powodując znaczne opóźnienia. Dodatkowo, proces transpozycji macierzy, polegający na przekształceniach struktur, wymaga wykonywania kolejnych kopii danych. Wynika to z faktu, że Elixir jest funkcyjnym językiem programowania, w którym z założenia wszelkie struktury danych są niezmienne.  
+W kategorii czasu odpowiedzi Java wypadła lepiej od JavaScript ze średnim czasem 162 milisekund przeciwko 644 milisekundom. W tym teście wyniki Elixira są znaczenie gorsze od dwóch pozostałych technologii osiągając średni czas odpowiedzi równy 22038 milisekund oraz tracąc 7% zapytań. Tak pokaźne pogorszenie w stosunku do poprzednich testów wynika z przyjętego modelu obliczeń. Model aktorowy, który uprzednio stanowił atut, jest przyczyną zwiększonych czasów odpowiedzi. Ze względu na fakt, że lekkie procesy w wirtualnej maszynie Erlanga nie współdzielą stanu, wszystkie dane pomiędzy nimi są kopiowane powodując opóźnienia. Dodatkowo, proces transpozycji macierzy, polegający na przekształceniach struktur, wymaga wykonywania kolejnych kopii danych, gdyż wszelkie struktury danych w języku Elixir są niezmienne.
 
 \begin{figure}[!ht]
 \centering
@@ -1100,7 +1104,7 @@ W kategorii czasu odpowiedzi Java wypadła lepiej od JavaScript ze średnim czas
 \caption{Wykres średniej liczby zapytań dla odczytu pliku}
 \end{figure}
 
-W przypadku odczytu pliku wszystkie zapytania i odpowiedzi zostały obsłużone w 100 procentach.
+W przypadku odczytu pliku wszystkie zapytania i odpowiedzi zostały obsłużone w 100%.
 
 \begin{figure}[!ht]
 \centering
@@ -1108,6 +1112,6 @@ W przypadku odczytu pliku wszystkie zapytania i odpowiedzi zostały obsłużone 
 \caption{Wykres czasu odpowiedzi dla odczytu pliku}
 \end{figure}
 
-Java uzyskała bardzo stabilne wyniki, wydajnościowo test nie stanowił problemu, lecz ze względu na to, że dostęp do plików w Javie jest w znacznej części blokujący, obsługa wielu zapytań czekała na urządzenie wejścia/wyjścia. Najniższy czas odpowiedzi, 248 milisekund, osiągnął JavaScript, a tuż za nim, z wynikiem 639 milisekund Elixir. Ze względu na to Node.js jest dobrze uwarunkowany do zadań wymagających nieznacznej mocy obliczeniowej oraz bardzo szybkiego dostępu do dysku i czasu odpowiedzi. Przykładem zastosowania tych atutów są między innymi serwery udostępniające dane strumieniowo.
+Java uzyskała bardzo stabilne wyniki, wydajnościowo test nie stanowił problemu, lecz ze względu na to, że dostęp do plików w Javie jest w znacznej części blokujący, obsługa wielu z zapytań została opóźniona przez oczekiwanie na urządzenie wejścia/wyjścia. Najniższy czas odpowiedzi, 248 milisekund, osiągnął JavaScript, a tuż za nim, z wynikiem 639 milisekund Elixir.
 
 \clearpage

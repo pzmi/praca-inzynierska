@@ -1,6 +1,6 @@
 # Wydajność
 
-Wydajność technologii można mierzyć pod wieloma różnymi aspektami, a na otrzymane wyniki wpływa duża liczba czynników. Przedstawiane środowiska programistyczne zostały przetestowane pod kątem wydajności, w kilku odmiennych scenariuszach.
+Wydajność technologii można mierzyć na wielu płaszczyznach, a na otrzymane wyniki wpływa duża liczba czynników. Przedstawiane środowiska programistyczne zostały przetestowane pod kątem wydajności, w kilku odmiennych scenariuszach.
 
 Wybrano 4 przypadki w 3 kategoriach:
 
@@ -47,7 +47,7 @@ Wersje oprogramowania:
 
 ## Duża liczba zapytań
 
-Wiele aplikacji używanych na co dzień korzysta z łączności sieciowej. Obserwuje się w ostatnich latach znaczny wzrost na rynku usług zdalnych, a także zwiększenie liczby użytkowników owych usług. Z tego względu współczesne systemy informatyczne muszą być w stanie obsłużyć znaczne liczby jednoczesnych połączeń i zapytań.
+Wiele aplikacji używanych na co dzień korzysta z łączności sieciowej. Obserwuje się w ostatnich latach znaczny wzrost na rynku usług zdalnych, a także zwiększenie liczby użytkowników owych usług. Z tego względu współczesne systemy informatyczne muszą być w stanie obsłużyć znaczną liczbę jednoczesnych połączeń i zapytań.
 
 Test polega na wykonaniu metody HTTP GET na serwerze zwracającym prosty łańcuch tekstowy. Zasymulowano 350000 użytkowników wykonujących żądanie niezależnie, rozłożonych na przestrzeni 100 sekund.
 
@@ -231,7 +231,7 @@ Liczba aktywnych użytkowników stabilizuje się po 25 sekundach od rozpoczęcia
 \caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
-Na wykresach \ref{elixir:simple:response_percentile} oraz \ref{elixir:simple:latency_percentile} wyraźnie widać czas stabilizacji aplikacji. Po nim, aplikacja zaczęła przyjmować zapytania na stałym poziomie.
+Na wykresach \ref{elixir:simple:response_percentile} oraz \ref{elixir:simple:latency_percentile} wyraźnie widać czas stabilizacji aplikacji, po którym aplikacja zaczęła przyjmować zapytania na stałym poziomie.
 
 \begin{figure}[htbp]
 \centering
@@ -337,7 +337,7 @@ W implementacji zastosowano iteracyjny algorytm wyznaczania n-tego elementu cią
 \caption{Wykres liczby zapytań na sekundę w czasie testu (źródło: praca własna)}
 \end{figure}
 
-Po upłynięciu 1/3 testu serwer przestał przyjmować zapytania. Wynika to z przyjętego modelu współbieżności. Każde nadchodzące zapytanie jest obsługiwane w nowym wątku lub jest reużywany wątek używany uprzednio. Przy takim natężeniu wymagających czasowo żądań, osiągnięto limit wykorzystywanych wątków. W związku z tym kolejne nadchodzące zapytania nie mogły zostać przetworzone.
+Po upłynięciu 1/3 testu serwer przestał przyjmować zapytania. Wynika to z przyjętego modelu współbieżności. Nadchodzące zapytanie jest obsługiwane w nowym wątku lub reużywany jest jeden z wcześniej utworzonych wątków. Przy takim natężeniu wymagających czasowo żądań, osiągnięto limit wykorzystywanych wątków. W związku z tym kolejne nadchodzące zapytania nie mogły zostać przetworzone.
 
 \begin{figure}[htbp]
 \centering
@@ -408,7 +408,7 @@ Powyższa implementacja jest translacją wersji w języku Java. JavaScript nie p
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
-96% zapytań zostało oznaczonych jako błędnych ze względu na przekroczenie czasu żądania wynoszącego 60 sekund. Wykorzystana biblioteka *bignum* jest implementacją natywną. Ze względu na charakterystykę zadania, wykonywanie jest wiele operacji na dużych liczbach. Z tego powodu silnik V8 języka JavaScript jest zmuszony do wykonywania ciągłych odwołań do natywnego kodu, co znaczenie spowalnia pracę aplikacji.
+96% zapytań zostało oznaczonych jako błędne ze względu na przekroczenie czasu żądania wynoszącego 60 sekund. Wykorzystana biblioteka *bignum* jest implementacją natywną. Ze względu na charakterystykę zadania, wykonywanie jest wiele operacji na dużych liczbach. Z tego powodu silnik V8 języka JavaScript jest zmuszony do wykonywania ciągłych odwołań do natywnego kodu, co znaczenie spowalnia pracę aplikacji.
 
 \begin{figure}[htbp]
 \centering
@@ -548,7 +548,7 @@ Table: Statystyki Elixir w teście z wykorzystaniem czasochłonnych obliczeń
 
 ## Operacje na zbiorach danych
 
-Zadaniem testu \ref{czasochux142onne-obliczenia} jest przetestowanie dużej liczby wykonywanych operacji na każde otrzymane żądanie. Celem tego testu jest porównanie każdej z wybranych technologii w kategorii możliwości manipulowania danymi pod obciążeniem.
+Zadaniem testu \ref{czasochux142onne-obliczenia} było zbadanie zachowania systemu przy dużej liczby wykonywanych operacji na każde otrzymane żądanie. Celem tego testu jest porównanie każdej z wybranych technologii w kategorii możliwości manipulowania danymi pod obciążeniem.
 
 Test polega na wykonaniu metody HTTP POST, w ciele której umieszczono wygenerowaną macierz liczb całkowitych o rozmiarze 100 na 100. Zadaniem serwera jest zwrócenie w odpowiedzi transponowanej macierzy. Zasymulowano 10000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
 
@@ -813,7 +813,7 @@ Table: Statystyki Elixir w teście z wykorzystaniem zbiorów danych
 
 ## Ograniczenia wejścia/wyjścia
 
-Większość systemów informatycznych korzysta z pewnego rodzaju urządzeń wejścia/wyjścia. Nie licząc urządzenia sieciowego, używanymi interfejsami mogą być system plików czy system zarządzania bazą danych. W tym teście wykorzystano system plików, gdyż jest obsługiwany przez standardową bibliotekę każdej w porównywanych technologii, w przeciwieństwie do komunikacji z bazą danych. 
+Większość systemów informatycznych korzysta z pewnego rodzaju urządzeń wejścia/wyjścia. Nie licząc urządzenia sieciowego, używanymi interfejsami mogą być system plików czy system zarządzania bazą danych. W tym teście wykorzystano system plików, gdyż jest obsługiwany przez standardową bibliotekę każdej z porównywanych technologii, w przeciwieństwie do komunikacji z bazą danych. 
 
 Test polega na wykonaniu metody HTTP GET na serwerze zwracającym plik tekstowy ze znakami ASCI o rozmiarze 1MB. Zasymulowano 12000 użytkowników wykonujących zapytanie niezależnie, rozłożonych na przestrzeni 100 sekund.
 
@@ -897,7 +897,7 @@ Table: Statystyki Java w teście z ograniczeniami wejścia/wyjścia
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
-Serwer na 10% zapytań wysłał odpowiedź w czasie poniżej 800 milisekund, na kolejnych 9% w czasie pomiędzy 800 a 1200 milisekund, zaś pozostałe powyżej 1200 milisekund.
+Na 10% z otrzymanych zapytań serwer odpowiedział w czasie poniżej 800 milisekund, na kolejnych 9% w czasie pomiędzy 800 a 1200 milisekund, zaś pozostałe powyżej 1200 milisekund.
 
 \begin{figure}[htbp]
 \centering
@@ -1034,7 +1034,7 @@ Table: Statystyki Elixir w teście z ograniczeniami wejścia/wyjścia
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/simple_avg.png}
-\caption{Wykres średniej liczby zapytań dla prostych zapytań}
+\caption{Wykres średniej liczby zapytań dla prostych zapytań (źródło: praca własna)}
 \end{figure}
 
 W przypadku testu dużej liczby jednoczesnych zapytań najlepszy wynik otrzymał Elixir. Osiągnął 3498,74 żądań na sekundę, a żadne z nich nie otrzymało błędnej odpowiedzi. Zastosowanie modelu aktorowego do obsługi zapytań sprowadza się do oddelegowania każdego przychodzącego żądania do nowego aktora. Strategia ta wypadła lepiej od odpowiednika w Javie, zakładającego wykorzystywanie wątków systemu operacyjnego do przetwarzania zapytań. Najgorszy wynik otrzymano przy użyciu JavaScript. Średnia liczba otrzymanych błędnych odpowiedzi niewiele różni się pomiędzy Javą i JavaScriptem, lecz przy 74% wydajności JavaScriptu względem Javy.
@@ -1042,7 +1042,7 @@ W przypadku testu dużej liczby jednoczesnych zapytań najlepszy wynik otrzymał
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/simple_percentage.png}
-\caption{Wykres poprawnej wymiany zapytań i odpowiedzi dla prostych zapytań}
+\caption{Wykres poprawnej wymiany zapytań i odpowiedzi dla prostych zapytań (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -1056,7 +1056,7 @@ W tym przypadku znaczący wpływ  wywarła optymalizacja w czasie wykonywania pr
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/fib_avg.png}
-\caption{Wykres średniej liczby zapytań dla wyliczenia liczby ciągu Fibonacciego}
+\caption{Wykres średniej liczby zapytań dla wyliczenia liczby ciągu Fibonacciego (źródło: praca własna)}
 \end{figure}
 
 W grupie czasochłonnych obliczeń, dla przypadku obliczania liczby Fibonacciego, pomimo zbliżonej średniej liczbie zapytań na sekundę pomiędzy Javą i Elixirem,  Elixir osiągnął lepszy wynik pod względem średniej liczby zapytań na sekundę oraz odsetka błędnych odpowiedzi. Procent poprawnie przetworzonych zapytań Javy i JavaScriptu, odpowiednio 26% i 4%, jest nieporównywalny z 75% Elixira.
@@ -1064,13 +1064,13 @@ W grupie czasochłonnych obliczeń, dla przypadku obliczania liczby Fibonacciego
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/fib_percentage.png}
-\caption{Wykres poprawnej wymiany zapytań i odpowiedzi dla wyliczenia liczby ciągu Fibonacciego}
+\caption{Wykres poprawnej wymiany zapytań i odpowiedzi dla wyliczenia liczby ciągu Fibonacciego (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/fib_response.png}
-\caption{Wykres czasu odpowiedzi dla wyliczenia liczby ciągu Fibonacciego}
+\caption{Wykres czasu odpowiedzi dla wyliczenia liczby ciągu Fibonacciego (źródło: praca własna)}
 \label{summary:fib:response}
 \end{figure}
 
@@ -1079,7 +1079,7 @@ Czasy odpowiedzi dla każdej z trzech testowanych technologii plasują się na p
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/matrix_avg.png}
-\caption{Wykres średniej liczby zapytań dla transpozycji macierzy}
+\caption{Wykres średniej liczby zapytań dla transpozycji macierzy (źródło: praca własna)}
 \end{figure}
 
 W przypadku transpozycji macierzy Java oraz JavaScript uzyskały niemalże identyczne wyniki. Rozwiązania z wykorzystaniem obu technologii obsłużyły poprawnie wszystkie zapytania z wynikiem około 100 zapytań na sekundę. 
@@ -1087,16 +1087,16 @@ W przypadku transpozycji macierzy Java oraz JavaScript uzyskały niemalże ident
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/matrix_percentage.png}
-\caption{Wykres poprawnej wymiany zapytań i odpowiedzi dla transpozycji macierzy}
+\caption{Wykres poprawnej wymiany zapytań i odpowiedzi dla transpozycji macierzy (źródło: praca własna)}
 \end{figure}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/matrix_response.png}
-\caption{Wykres czasu odpowiedzi dla transpozycji macierzy}
+\caption{Wykres czasu odpowiedzi dla transpozycji macierzy (źródło: praca własna)}
 \end{figure}
 
-W kategorii czasu odpowiedzi Java wypadła lepiej od JavaScript ze średnim czasem 162 milisekund przeciwko 644 milisekundom. W tym teście wyniki Elixira są znaczenie gorsze od dwóch pozostałych technologii osiągając średni czas odpowiedzi równy 22038 milisekund oraz tracąc 7% zapytań. Tak pokaźne pogorszenie w stosunku do poprzednich testów wynika z przyjętego modelu obliczeń. Model aktorowy, który uprzednio stanowił atut, jest przyczyną zwiększonych czasów odpowiedzi. Ze względu na fakt, że lekkie procesy w wirtualnej maszynie Erlanga nie współdzielą stanu, wszystkie dane pomiędzy nimi są kopiowane powodując opóźnienia. Dodatkowo, proces transpozycji macierzy, polegający na przekształceniach struktur, wymaga wykonywania kolejnych kopii danych, gdyż wszelkie struktury danych w języku Elixir są niezmienne.
+W kategorii czasu odpowiedzi Java wypadła lepiej od JavaScript ze średnim czasem 162 milisekund przeciwko 644 milisekundom. W tym teście wyniki Elixira są znaczenie gorsze od dwóch pozostałych technologii osiągając średni czas odpowiedzi równy 22038 milisekund oraz tracąc 7% zapytań. Tak pokaźne pogorszenie w stosunku do poprzednich testów wynika z przyjętego modelu obliczeń. Model aktorowy, który uprzednio stanowił atut, jest przyczyną dłuższych czasów odpowiedzi. Ze względu na fakt, że lekkie procesy w wirtualnej maszynie Erlanga nie współdzielą stanu, wszystkie dane pomiędzy nimi są kopiowane powodując opóźnienia. Proces transpozycji macierzy w dużej mierze polega na przekształceniach struktur danych. W języku Elixir wszystkie struktury danych są niezmienne, więc w każdym kroku wykonywane są kolejne kopie danych, co ma negatywny wpływ na wyniki.
 
 \begin{figure}[!ht]
 \centering
@@ -1109,7 +1109,7 @@ W przypadku odczytu pliku wszystkie zapytania i odpowiedzi zostały obsłużone 
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/file_response.png}
-\caption{Wykres czasu odpowiedzi dla odczytu pliku}
+\caption{Wykres czasu odpowiedzi dla odczytu pliku (źródło: praca własna)}
 \end{figure}
 
 Java uzyskała bardzo stabilne wyniki, wydajnościowo test nie stanowił problemu, lecz ze względu na to, że dostęp do plików w Javie jest w znacznej części blokujący, obsługa wielu z zapytań została opóźniona przez oczekiwanie na urządzenie wejścia/wyjścia. Najniższy czas odpowiedzi, 248 milisekund, osiągnął JavaScript, a tuż za nim, z wynikiem 639 milisekund Elixir.

@@ -129,6 +129,8 @@ Rysunki \ref{java:simple:response_percentile},\ref{java:simple:latency_percentil
 
 Table: Statystyki Java w teście prostego zapytania
 
+\clearpage
+
 ### JavaScript
 
 \begin{figure}[htbp]
@@ -1048,7 +1050,7 @@ W przypadku testu dużej liczby jednoczesnych zapytań najlepszy wynik otrzymał
 \begin{figure}[!ht]
 \centering
 \includegraphics[resolution=120]{test_results/summary/simple_response.png}
-\caption{Wykres czasu odpowiedzi dla prostych zapytań}
+\caption{Wykres czasu odpowiedzi dla prostych zapytań (źródło: praca własna)}
 \end{figure}
 
 W tym przypadku znaczący wpływ  wywarła optymalizacja w czasie wykonywania programu. Czasy odpowiedzi pierwszych 20 sekund przetwarzania w Elixirze, chociaż niższe od ekwiwalentnych w Javie i JavaScripcie, są nieporównywalnie wyższe od kolejnych. Wirtualna maszyna Erlanga wykryła powtarzający się wzorzec i stworzyła optymalny kod dla tego przypadku. Powtórne testy wykazały takie same wyniki w każdej z prób. Średni czas odpowiedzi dla Javy i JavaScriptu jest porównywalny, z nieznaczącą przewagą pierwszej technologii. Rezultat ten odbił się na odchyleniu standardowym ze względu na wyższy czas maksymalny w Javie.

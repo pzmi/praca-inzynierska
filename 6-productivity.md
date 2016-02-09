@@ -1,6 +1,6 @@
 # Produktywność
 
-**Produktywność** - wielkość efektu produkcyjnego uzyskanego z danych nakładów. \autocite{sjp2015}
+**Produktywność** - wielkość efektu produkcyjnego uzyskanego z danych nakładów \autocite{sjp2015}.
 
 ## Kod
 
@@ -53,6 +53,6 @@ Pliki konfiguracyjne aplikacji wszystkich trzech technologii zawierają informac
 ## Biblioteki
 
 Istotnym elementem każdej technologii deweloperskiej jest dostępność bibliotek. Znaczną część pracy można wykonać bez napisania ani jednej linijki kodu, z wykorzystaniem dostępnych publicznie bibliotek. Dzięki temu zyskujemy przetestowaną funkcjonalność, gotową do użycia.
-Największym repozytorium bibliotek bazujących na wirtualnej maszynie Javy jest Central Repository\autocite{centralrepository2015}. Istniejąca od 2002 roku baza skupia około 130 tysięcy projektów, które w sumie udostępniły prawie 1,2 miliona artefaktów. Niestety nie są dostępne aktualne statystyki pobrań.\autocite{centralstats2015} Na dorobek Javy składa się praca wielu organizacji patronujących otwartym projektom. Wśród nich znajdują się fundacje jak Apache Software Foundation\autocite{apachefoundation2015} skupiająca ponad 350 projektów Open Source oraz inicjatyw obejmujących szerokie spektrum technologii, czy Eclipse Foundation\autocite{eclipsefoundation2015}, będąca członkiem komitetu Java Community Process. Na rozwój Javy mają również wpływ przedsiębiorstwa w różnych branżach. [zob. \ref{architektura---java}]  
-npm, repozytorium modułów Node.js, gromadzi ich prawie 230 tysięcy, licząc ponad 140 milionów pobrań dziennie.\autocite{npm2015} Powszechność JavaScriptu sprzyja powstawaniu nowych projektów, lecz bez wsparcia zorganizowanych podmiotów, tak jak w przypadku Javy, znaczna ich część pozostaje we wczesnej fazie rozwoju lub jest porzucana.  
-Ze względu na fakt, że Elixir jest młodym językiem, zbiór dostępnych bibliotek nie jest tak imponujący jak w przypadku dwóch pozostałych ekosystemów. Projekt hex, tworzący manager pakietów w języku Elixir, gromadzi 1384 modułów w 6097 wersjach, które pobrano ponad 100 tysięcy razy dziennie.\autocite{hex2015}
+Największym repozytorium bibliotek bazujących na wirtualnej maszynie Javy jest Central Repository \autocite{centralrepository2015}. Istniejąca od 2002 roku baza skupia około 130 tysięcy projektów, które w sumie udostępniły prawie 1,2 miliona artefaktów. Niestety nie są dostępne aktualne statystyki pobrań \autocite{centralstats2015}. Na dorobek Javy składa się praca wielu organizacji patronujących otwartym projektom. Wśród nich znajdują się fundacje jak Apache Software Foundation \autocite{apachefoundation2015} skupiająca ponad 350 projektów Open Source oraz inicjatyw obejmujących szerokie spektrum technologii, czy Eclipse Foundation \autocite{eclipsefoundation2015}, będąca członkiem komitetu Java Community Process. Na rozwój Javy mają również wpływ przedsiębiorstwa w różnych branżach [zob. \ref{architektura---java}].
+npm, repozytorium modułów Node.js, gromadzi ich prawie 230 tysięcy, licząc ponad 140 milionów pobrań dziennie \autocite{npm2015}. Powszechność JavaScriptu sprzyja powstawaniu nowych projektów, lecz bez wsparcia zorganizowanych podmiotów, tak jak w przypadku Javy, znaczna ich część pozostaje we wczesnej fazie rozwoju lub jest porzucana.  
+Ze względu na fakt, że Elixir jest młodym językiem, zbiór dostępnych bibliotek nie jest tak imponujący jak w przypadku dwóch pozostałych ekosystemów. Projekt hex, tworzący manager pakietów w języku Elixir, gromadzi 1384 modułów w 6097 wersjach, które pobrano ponad 100 tysięcy razy dziennie \autocite{hex2015}.

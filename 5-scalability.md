@@ -1,7 +1,7 @@
 # Skalowalność
 
 *Skalowalność*, w kontekście systemów informatycznych, jest zdolnością systemu do efektywnego wykorzystania zwiększonej puli zasobów. Innymi słowy zwiększając możliwości obliczeniowe sprzętu, w ramach którego oprogramowanie jest uruchomione, wydajność powinna się zwiększyć.
-Można wyróżnić dwa wymiary skalowalności\autocite{elrewini2005advanced}:
+Można wyróżnić dwa wymiary skalowalności \autocite{elrewini2005advanced}:
 
  - pionowa
  - pozioma
@@ -9,7 +9,7 @@ Można wyróżnić dwa wymiary skalowalności\autocite{elrewini2005advanced}:
 
 ## Skalowalność pionowa
 
-Mówimy o *skalowalności pionowej* jeśli zwiększamy zasoby jednego węzła systemu komputerowego, rdzenie procesora lub pamięć do jednego komputera.\autocite{elrewini2005advanced}
+Mówimy o *skalowalności pionowej* jeśli zwiększamy zasoby jednego węzła systemu komputerowego, rdzenie procesora lub pamięć do jednego komputera \autocite{elrewini2005advanced}.
 
 Wirtualna maszyna, z której korzysta Java, jest w stanie użyć wszystkich dostępnych rdzeni procesora. Ich wykorzystanie zależy od zastosowania mechanizmów współbieżności dostępnych w języku, np. wątków. Wielowątkowość JVM jest zaimplementowana z użyciem natywnych wątków systemów operacyjnych. Dodatkowo Java udostępnia pewne abstrakcje, np. wykonawców (ang. *executor*), mające za zadanie ułatwić programistom prace w wielowątkowym środowisku. Wirtualna maszyna Javy oferuje zbiór parametrów konfiguracyjnych pozwalających na strojenie jej pracy. Dzięki nim można dostosować, między innymi, wykorzystanie pamięci operacyjnej, aby lepiej wykorzystać dostępne zasoby.
 
@@ -19,7 +19,7 @@ Wirtualna maszyna Erlanga, BEAM, zarządza lekkimi procesami automatycznie, zajm
 
 ## Skalowalność pozioma
 
-Mówimy o *skalowalności poziomej* jeśli dodajemy kolejne węzły do rozproszonego systemu komputerowego.\autocite{elrewini2005advanced}
+Mówimy o *skalowalności poziomej* jeśli dodajemy kolejne węzły do rozproszonego systemu komputerowego \autocite{elrewini2005advanced}.
 
 Aplikacje, które nie były projektowane z myślą o przetwarzaniu rozproszonym, mogą być skalowane z użyciem uniwersalnych technik. Dzięki nim monolityczne systemy, do pewnego stopnia, mogą czerpać korzyść z używania wielu maszyn jednocześnie. Podstawową techniką jest uruchamianie wielu instancji aplikacji oraz zrównoważenie obciążenia (ang. *loadbalancing*) pomiędzy nimi. Nie jest to jednak technika wykorzystywana jedynie w przypadku systemów monolitycznych, można ją wykorzystać również dla architektur mikroserwisowych. Powszechną praktyką jest powielanie wybranych usług w czasie dużego ich obciążenia, często przeprowadzane automatycznie.
 

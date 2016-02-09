@@ -31,7 +31,8 @@ Maszyna testująca:
 Na maszynę testującą celowo wybrano komputer o większej mocy, aby zapewnić ciągłość testów i uniknąć komplikacji wynikających z niewystarczającej mocy do analizy danych. Komputery podłączono bezpośrednio w sieć o przepustowości 1Gb/s.  
 Oprogramowanie wykorzystane do implementacji oraz przeprowadzenia testów wybrano na podstawie powszechności zastosowania. Parametr ten określono w oparciu statystyki dostępne w publicznych repozytoriach \autocite{npm2015,mavenrepo2015, hex2015}.  
 Rozwiązanie w języku Java stworzono na bazie serwera aplikacyjnego WildFly, będącego otwartą dla społeczności dystrybucją serwera JBoss Enterprise Application Platform firmy RedHat. Wspiera on najnowszą dostępną wersję standardu Java EE 7.  
-W implementacji kodu JavaScript i Node.js wykorzystano bibliotekę Express.js udostępniającą podstawowe mechanizmy wymagane do stworzenia aplikacji internetowej, przy zapewnieniu stabilności dla rozwiązań produkcyjnych.  Rozwiązanie w języku Elixir korzysta z pakietu Phoenix Framework, gromadzącego dojrzałe technologie, przeznaczone do zastosowań w usługach internetowych.  
+W implementacji kodu JavaScript i Node.js wykorzystano bibliotekę Express.js udostępniającą podstawowe mechanizmy wymagane do stworzenia aplikacji internetowej, przy zapewnieniu stabilności dla rozwiązań produkcyjnych.  Rozwiązanie  
+w języku Elixir korzysta z pakietu Phoenix Framework, gromadzącego dojrzałe technologie, przeznaczone do zastosowań w usługach internetowych.  
 Do przeprowadzenia badań wykorzystano oprogramowanie Gatling. Udostępnia ono, bazujący na języku Scala, język definiowania testów obciążeniowych.
 
 Wersje oprogramowania:
@@ -57,11 +58,12 @@ Implementacje we wszystkich trzech technologiach są trywialne, polegają na pro
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/java/simpletest/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/java/simpletest/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
-Na połowę zapytań otrzymano odpowiedź w czasie poniżej 800 milisekund, a nieznaczna cześć z nich została oznaczona jako błędne.
+Na połowę zapytań otrzymano odpowiedź w czasie poniżej 800 milisekund,  
+a nieznaczna cześć z nich została oznaczona jako błędne.
 
 \begin{figure}[htbp]
 \centering
@@ -135,7 +137,7 @@ Table: Statystyki Java w teście prostego zapytania
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/js/simpletest/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/js/simpletest/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -207,7 +209,7 @@ Table: Statystyki JavaScript w teście prostego zapytania
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/elixir/simpletest/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/elixir/simpletest/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -315,7 +317,7 @@ W implementacji zastosowano iteracyjny algorytm wyznaczania n-tego elementu cią
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/java/fibonacci/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/java/fibonacci/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -406,7 +408,7 @@ Powyższa implementacja jest translacją wersji w języku Java. JavaScript nie p
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/js/fibonacci/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/js/fibonacci/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -486,7 +488,7 @@ W języku Elixir, z racji jego funkcyjnego charakteru, nie istnieje pojęcie pę
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/elixir/fibonacci/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/elixir/fibonacci/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -578,7 +580,7 @@ Powyższy kod pobiera wymiary $x, y$ przekazanej macierzy $a$, aby utworzyć now
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/java/matrix/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/java/matrix/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -666,7 +668,7 @@ Implementacja ta jest translacją z języka Java, jednak każdy z wierszy jest t
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/js/matrix/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/js/matrix/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -748,7 +750,7 @@ Transpozycja macierzy w języku Elixir korzysta z jego funkcyjnych możliwości.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/elixir/matrix/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/elixir/matrix/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -825,7 +827,7 @@ Implementacje we wszystkich trzech technologiach są trywialne, korzystają ze s
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/java/file/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/java/file/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -895,7 +897,7 @@ Table: Statystyki Java w teście z ograniczeniami wejścia/wyjścia
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/js/file/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/js/file/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
@@ -965,7 +967,7 @@ Table: Statystyki JavaScript w teście z ograniczeniami wejścia/wyjścia
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[resolution=150]{test_results/elixir/file/screenshots/response_times.png}
+\includegraphics[resolution=105]{test_results/elixir/file/screenshots/response_times.png}
 \caption{Wykres czasu odpowiedzi na zapytania (źródło: praca własna)}
 \end{figure}
 
